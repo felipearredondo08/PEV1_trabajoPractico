@@ -46,9 +46,28 @@ public string dentroDeRango(int n1, int n2, int n3) //Aqui determinamos que la f
     // Start is called before the first frame update
     void Start()
     {
-      
+             //////////////////////////////////////////////EJERCICIO N°2////////////////////////////////////////////////////
+
+        int n1 = UnityEngine.Random.Range(-100, 100); //unity genera 3 numeros aleatorios entre -100 y 100 y los guarda en 3 variables.
+        
+        int n2 = UnityEngine.Random.Range(-100, 100);
+        
+        int n3 = UnityEngine.Random.Range(-100, 100);
+
+           string resultado = dentroDeRango(n1, n2, n3); //aqui ejecuta la funcion y devuelve el string correspondiente a los condiciones if de la funcion
+
+        
+        Debug.Log($"Valores generados: {n1}, {n2}, {n3}"); //aqui muestra los valores generados aleatoriamente por consola.
+        
+        Debug.Log(resultado); //aqui muestra el string almacenado en la variable resultado por consola.
+
+
       
     }
+
+
+      
+    
 
     // Update is called once per frame
     void Update()
