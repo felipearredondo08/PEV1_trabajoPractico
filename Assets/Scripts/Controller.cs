@@ -7,10 +7,10 @@ public class Controller : MonoBehaviour
 {
 
 
-
+    
     public float movementSpeed = 100; //definimos una variable para la velocidad del movimiento
 
-    public float jumpForce = 8f; //definimos una variable para luego multiplicar la fuerza de salto.
+    public float jumpForce = 100f; //definimos una variable para luego multiplicar la fuerza de salto.
 
     private Rigidbody2D rbody; // definimos la variable donde se guardara el componente Rigidbody2d de unity
 
@@ -41,6 +41,8 @@ public class Controller : MonoBehaviour
         {
             Jump();
         }
+
+        
     }
 
     public void Jump(){
@@ -50,5 +52,9 @@ public class Controller : MonoBehaviour
         
 
     }
+
+
+
+
 }
 
