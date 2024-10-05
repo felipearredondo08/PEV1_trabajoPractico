@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8fb5cc6d48568794f83fcdcd08a01393
+guid: 86b97db3f33ed464ba03be03127b8cc8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_0
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 664bd97c7b2bfce46afac702673ddfbc
-      internalID: -992331407
+      spriteID: eb4ab7d9df2a8f045ac9e7cb7d7f7da3
+      internalID: 1530466981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_1
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_1
       rect:
         serializedVersion: 2
         x: 17
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8de70f61c1992394a8a3f50b14a02020
-      internalID: 194573511
+      spriteID: ff960a7d9b34f8947b9c7fda02285ad7
+      internalID: 1393177297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_2
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_2
       rect:
         serializedVersion: 2
         x: 34
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cb8f8afd4e312e4294833b5eb3cbc08
-      internalID: -1030629790
+      spriteID: c12a893725f70c34091ebd735a6dcc6d
+      internalID: -384235621
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_3
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_3
       rect:
         serializedVersion: 2
         x: 51
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b506f6ddd92240488bd03da21a1292e
-      internalID: 1922572309
+      spriteID: edd9a4f6f9b545a45b73f065c787c17f
+      internalID: -1132555508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_4
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_4
       rect:
         serializedVersion: 2
         x: 68
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 144dde28a7866094398f99cd79b82597
-      internalID: 1982383343
+      spriteID: 8eeb0ad2b92eb9a43a4638ff12b241b2
+      internalID: 1746342181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_5
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_5
       rect:
         serializedVersion: 2
         x: 0
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b10d85d90d1aa6e489465a1793a7ce60
-      internalID: 989362342
+      spriteID: d930cb5e5d1a9524c97520e71ff2732e
+      internalID: 1628526673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_6
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_6
       rect:
         serializedVersion: 2
         x: 17
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45480625324a2304bad2813ec6b34937
-      internalID: 1817827260
+      spriteID: 99e271092f2488b47bbfe65f644647e8
+      internalID: 412095242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_7
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_7
       rect:
         serializedVersion: 2
         x: 34
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 261ea4b8674c7e044942b014557b3200
-      internalID: 1833557181
+      spriteID: f01ee7027240fb44191909311e22087f
+      internalID: 1539076768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_8
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_8
       rect:
         serializedVersion: 2
         x: 51
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a6afe9ea92dbd544a55c21ea3885ec5
-      internalID: -1042505319
+      spriteID: f8af5391ec762d4489255aeedcb38272
+      internalID: -1106218064
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_9
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_9
       rect:
         serializedVersion: 2
         x: 68
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16234e4faaf6a27458338445f54a26a6
-      internalID: 1264142041
+      spriteID: 00693bbe21b8a594bbe7f643a4735428
+      internalID: -1659301673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_10
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_10
       rect:
         serializedVersion: 2
         x: 0
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c060e6bd6fd3b584f84d0aae93ff4a35
-      internalID: 1900518320
+      spriteID: 905cde35bee32b240963f0742c917cc8
+      internalID: -2131020836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_11
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_11
       rect:
         serializedVersion: 2
         x: 17
@@ -355,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 640091b1ba935d94dae4bd862856c5d7
-      internalID: 712103390
+      spriteID: 21f8a712dfc74c242b9984ec657253e1
+      internalID: -822133357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_12
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_12
       rect:
         serializedVersion: 2
         x: 34
@@ -376,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 263f5290bbebfe24a99e4d8051acacff
-      internalID: -1193101826
+      spriteID: eb3c76b295e1af64b94f8c5c4b06fa22
+      internalID: -1287780996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_13
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_13
       rect:
         serializedVersion: 2
         x: 51
@@ -397,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c3c86450752f314f8f314df24a4d672
-      internalID: 1538818248
+      spriteID: 612b7af199d6a564db5a8a1b27f54ac4
+      internalID: 164019420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_14
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_14
       rect:
         serializedVersion: 2
         x: 68
@@ -418,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b002cb21796f09446b6ad4bb57637780
-      internalID: 2115896259
+      spriteID: cb6e77b2f3e81434c81e65c3f799c607
+      internalID: 612566944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_15
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_15
       rect:
         serializedVersion: 2
         x: 0
@@ -439,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8616a598dc9fbfa4db68c949dc77e7a9
-      internalID: -1455706623
+      spriteID: fe8562914a148dd4fb3e0d0e63efdd92
+      internalID: 1073959714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_16
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_16
       rect:
         serializedVersion: 2
         x: 17
@@ -460,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e79510be6f0bc940a3a699421f5eb30
-      internalID: -1188737032
+      spriteID: 4c8ed1cf3af179346ad166e82ea737e9
+      internalID: -831368053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_17
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_17
       rect:
         serializedVersion: 2
         x: 34
@@ -481,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6de79fb796e8314bb2059236b6907f4
-      internalID: 959988773
+      spriteID: 04d93c3dd5f666f4ba453e1f0403bd97
+      internalID: 1042258538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_18
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_18
       rect:
         serializedVersion: 2
         x: 51
@@ -502,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61ff8bbe1146e5c4d9fb288619751296
-      internalID: -1688071977
+      spriteID: 0e933b20d2f3f684897bbbd5a5c896c5
+      internalID: 1243292391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_19
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_19
       rect:
         serializedVersion: 2
         x: 68
@@ -523,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 525e8141b4374df439b103bab71973c7
-      internalID: 348088838
+      spriteID: 1ac7a6591d4ffed4d8dc464a64c8ccb4
+      internalID: 1095292683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_20
+      name: Pipina_TA_Walk_Jump_Idle-Sheet_20
       rect:
         serializedVersion: 2
         x: 0
@@ -544,29 +544,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5456a98f8772d344a100d374df4591b
-      internalID: -1699808964
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pipina_TA_Walk_Jump-Sheet_21
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 0
-        width: 17
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 86190dfee8a254b43a97bb6d1b2e9f58
-      internalID: 1274749176
+      spriteID: 13bf99af710fd604bb98bbab3917c5b6
+      internalID: -479761770
       vertices: []
       indices: 
       edges: []
@@ -582,28 +561,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pipina_TA_Walk_Jump-Sheet_0: -992331407
-      Pipina_TA_Walk_Jump-Sheet_1: 194573511
-      Pipina_TA_Walk_Jump-Sheet_10: 1900518320
-      Pipina_TA_Walk_Jump-Sheet_11: 712103390
-      Pipina_TA_Walk_Jump-Sheet_12: -1193101826
-      Pipina_TA_Walk_Jump-Sheet_13: 1538818248
-      Pipina_TA_Walk_Jump-Sheet_14: 2115896259
-      Pipina_TA_Walk_Jump-Sheet_15: -1455706623
-      Pipina_TA_Walk_Jump-Sheet_16: -1188737032
-      Pipina_TA_Walk_Jump-Sheet_17: 959988773
-      Pipina_TA_Walk_Jump-Sheet_18: -1688071977
-      Pipina_TA_Walk_Jump-Sheet_19: 348088838
-      Pipina_TA_Walk_Jump-Sheet_2: -1030629790
-      Pipina_TA_Walk_Jump-Sheet_20: -1699808964
-      Pipina_TA_Walk_Jump-Sheet_21: 1274749176
-      Pipina_TA_Walk_Jump-Sheet_3: 1922572309
-      Pipina_TA_Walk_Jump-Sheet_4: 1982383343
-      Pipina_TA_Walk_Jump-Sheet_5: 989362342
-      Pipina_TA_Walk_Jump-Sheet_6: 1817827260
-      Pipina_TA_Walk_Jump-Sheet_7: 1833557181
-      Pipina_TA_Walk_Jump-Sheet_8: -1042505319
-      Pipina_TA_Walk_Jump-Sheet_9: 1264142041
+      Pipina_TA_Walk_Jump_Idle-Sheet_0: 1530466981
+      Pipina_TA_Walk_Jump_Idle-Sheet_1: 1393177297
+      Pipina_TA_Walk_Jump_Idle-Sheet_10: -2131020836
+      Pipina_TA_Walk_Jump_Idle-Sheet_11: -822133357
+      Pipina_TA_Walk_Jump_Idle-Sheet_12: -1287780996
+      Pipina_TA_Walk_Jump_Idle-Sheet_13: 164019420
+      Pipina_TA_Walk_Jump_Idle-Sheet_14: 612566944
+      Pipina_TA_Walk_Jump_Idle-Sheet_15: 1073959714
+      Pipina_TA_Walk_Jump_Idle-Sheet_16: -831368053
+      Pipina_TA_Walk_Jump_Idle-Sheet_17: 1042258538
+      Pipina_TA_Walk_Jump_Idle-Sheet_18: 1243292391
+      Pipina_TA_Walk_Jump_Idle-Sheet_19: 1095292683
+      Pipina_TA_Walk_Jump_Idle-Sheet_2: -384235621
+      Pipina_TA_Walk_Jump_Idle-Sheet_20: -479761770
+      Pipina_TA_Walk_Jump_Idle-Sheet_3: -1132555508
+      Pipina_TA_Walk_Jump_Idle-Sheet_4: 1746342181
+      Pipina_TA_Walk_Jump_Idle-Sheet_5: 1628526673
+      Pipina_TA_Walk_Jump_Idle-Sheet_6: 412095242
+      Pipina_TA_Walk_Jump_Idle-Sheet_7: 1539076768
+      Pipina_TA_Walk_Jump_Idle-Sheet_8: -1106218064
+      Pipina_TA_Walk_Jump_Idle-Sheet_9: -1659301673
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
