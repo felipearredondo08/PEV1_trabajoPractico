@@ -28,6 +28,8 @@ public class Controller : MonoBehaviour
 
     private SpriteRenderer spr;
 
+    private AudioSource audioSource;
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///WIND CONTROLLER -----> preguntar <summary>
     /// WIND CONTROLLER -----> preguntar
@@ -45,6 +47,7 @@ public class Controller : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>(); //traemos el componente Rigidbody2d y lo guardamos en la variable que habiamos creado.
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -85,6 +88,7 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+            
         }
 
         // Lógica de animaciones
@@ -136,6 +140,7 @@ public class Controller : MonoBehaviour
 
     // Aplica la fuerza del viento
     rbody.AddForce(windDirection * windForce, ForceMode2D.Impulse);
+    audioSource.Play();
 }
 
 
