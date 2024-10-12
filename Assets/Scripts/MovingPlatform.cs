@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public float speed = 3f; // Velocidad de la plataforma
-    public float distance = 5f; // Distancia que la plataforma recorrerá
+    public float speed = 1f; // Velocidad de la plataforma
+    public float distance = 1f; // Distancia que la plataforma recorrerá
     private Vector3 startPos; // Posición inicial de la plataforma
 
     // Start is called before the first frame update
