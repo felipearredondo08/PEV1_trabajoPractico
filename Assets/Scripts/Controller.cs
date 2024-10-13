@@ -22,7 +22,7 @@ public class Controller : MonoBehaviour
 
     public LayerMask groundLayer;//definimos una variable donde guardar el nombre de la etiqueta de "suelo".
 
-    public float radius = 1.3f;//creamos una variable para achicar o contraer el radio del circulo que hara contacto con el suelo.
+    public float radius = 0.0f;//creamos una variable para achicar o contraer el radio del circulo que hara contacto con el suelo.
 
     private Animator anim;
 
