@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ public GameObject door;
 
     private void OnCollisionEnter2D(Collision2D other) {
         
-        if(other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
         {
             door.SetActive(false);
         }
@@ -42,6 +42,46 @@ public GameObject door;
         }
     } */
 
-}
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class Button : MonoBehaviour
+{
+    public GameObject door;
+    private bool playerInRange = false;
+
+    public AudioSource audioSource;
+
+void Start()
+    {
+       audioSource = GetComponent<AudioSource>();
+    }
+    void Update()
+    {
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        {
+            door.SetActive(false);
+            audioSource.Play();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+   /*private void OnCollisionExit2D(Collision2D other)
+    {
+        if (playerInRange)
+        {
+            playerInRange = false;
+            door.SetActive(true); // Opcional: Activa la puerta cuando el jugador salga del colisionador
+        }
+    }*/ 
+    
+}
 
