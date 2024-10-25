@@ -6,7 +6,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
 
-
+    public int contadorMoneditas = 0;
 
     public float movementSpeed = 100; //definimos una variable para la velocidad del movimiento
 
