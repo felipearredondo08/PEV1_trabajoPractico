@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 
     public void ActualizarContadorMoneditas(int cantidad)
     {
-        textoMonedas.text = "= " + cantidad;
+       // textoMonedas.text = "= " + cantidad;
+       textoMonedas.text = "" + cantidad;
     }
 }
