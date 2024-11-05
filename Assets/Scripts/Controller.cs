@@ -141,6 +141,9 @@ public class Controller : MonoBehaviour
     // Aplica la fuerza del viento
     rbody.AddForce(windDirection * windForce, ForceMode2D.Impulse);
     audioSource.Play();
+
+     anim.SetTrigger("isJump");
+
 }
 
 
