@@ -7,6 +7,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     public float zoomedOutSize = 10f; // Tamaño de zoom alejado
     public float transitionSpeed = 2f; // Velocidad de la transición
     public float offsetX = 0.3f; // Valor entre 0 y 1 para desplazar la cámara en X (0.5f es centrado)
+    public Camera parallaxCamera; // Asigna el GameObject con el script Camera.cs aquí
 
     private float initialZoomSize; // Almacena el tamaño inicial de zoom
     private float initialScreenX; // Almacena la posición inicial de la cámara en X en la pantalla
@@ -55,6 +56,12 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             // Establece el tamaño de zoom alejado y el desplazamiento horizontal
             targetSize = zoomedOutSize;
             targetScreenX = offsetX;
+
+            // Desactiva el script Camera.cs para detener el parallax
+            if (parallaxCamera != null)
+            {
+                parallaxCamera.enabled = false;
+            }
         }
     }
 
@@ -65,6 +72,12 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             // Restaura el tamaño inicial de zoom y la posición horizontal
             targetSize = initialZoomSize;
             targetScreenX = initialScreenX;
+
+            // Reactiva el script Camera.cs para volver a activar el parallax
+            if (parallaxCamera != null)
+            {
+                parallaxCamera.enabled = true;
+            }
         }
     }
 }
