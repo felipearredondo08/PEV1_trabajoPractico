@@ -6,8 +6,8 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     public float zoomedOutSize = 10f; // Tamaño de zoom alejado
     public float transitionSpeed = 2f; // Velocidad de la transición
-    public float offsetX = 0.3f; // Desplazamiento horizontal (ScreenX)
-    public float offsetY = 0.5f; // Desplazamiento vertical (ScreenY)
+    public float offsetX = 0.0f; // Desplazamiento horizontal (ScreenX)
+    public float offsetY = 0.0f; // Desplazamiento vertical (ScreenY)
     public Camera parallaxCamera; // Para controlar el parallax
 
     private float initialZoomSize; // Zoom inicial
