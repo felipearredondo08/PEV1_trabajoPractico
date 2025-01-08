@@ -4,16 +4,17 @@ using Cinemachine;
 public class CameraZoomAndOffsetTrigger : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
-    public float zoomedOutSize = 10f; // Tamaño de zoom alejado
-    public float transitionSpeed = 2f; // Velocidad de la transición
-    public float offsetX = 0.0f; // Desplazamiento horizontal (ScreenX)
-    public float offsetY = 0.0f; // Desplazamiento vertical (ScreenY)
-    public Camera parallaxCamera; // Para controlar el parallax
+    public float zoomedOutSize ;
+    public float transitionSpeed = 2f;
+    public float offsetX = 0.0f;
+    public float offsetY = 0.0f;
+    public Camera parallaxCamera;
+    public MonoBehaviour parallaxScript; // Referencia al script de parallax (MonoBehaviour para flexibilidad)
 
-    private float initialZoomSize; // Zoom inicial
-    private float initialScreenX; // ScreenX inicial
-    private float initialScreenY; // ScreenY inicial
-    private float targetSize; 
+    private float initialZoomSize;
+    private float initialScreenX;
+    private float initialScreenY;
+    private float targetSize;
     private float targetScreenX;
     private float targetScreenY;
 
@@ -21,6 +22,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     {
         if (virtualCamera != null)
         {
+            // Configurar los valores iniciales
             initialZoomSize = virtualCamera.m_Lens.OrthographicSize;
             targetSize = initialZoomSize;
 
@@ -57,13 +59,19 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Establecer valores de zoom y desplazamiento a los definidos en la configuración del trigger
             targetSize = zoomedOutSize;
-            targetScreenX = offsetX;
-            targetScreenY = offsetY;
+            targetScreenX = initialScreenX + offsetX; // Basado en el valor inicial
+            targetScreenY = initialScreenY + offsetY;
 
+            // Desactivar el parallax
             if (parallaxCamera != null)
             {
                 parallaxCamera.enabled = false;
+            }
+            if (parallaxScript != null)
+            {
+                parallaxScript.enabled = false;
             }
         }
     }
@@ -72,13 +80,19 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Restablecer los valores al estado inicial
             targetSize = initialZoomSize;
             targetScreenX = initialScreenX;
             targetScreenY = initialScreenY;
 
+            // Activar el parallax
             if (parallaxCamera != null)
             {
                 parallaxCamera.enabled = true;
+            }
+            if (parallaxScript != null)
+            {
+                parallaxScript.enabled = true;
             }
         }
     }

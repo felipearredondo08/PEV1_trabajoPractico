@@ -10,6 +10,7 @@ public class DialogoN1 : MonoBehaviour
     [SerializeField] private GameObject animationObject; // Referencia a la imagen de animación
     [SerializeField] private AudioSource audioSource; // Referencia al AudioSource
     [SerializeField] private AudioClip typingSound; // Referencia al sonido a reproducir al escribir cada carácter
+    [SerializeField] private GameObject areaDialogoInicialCamara; // Referencia al objeto a destruir
     [TextArea(3, 5)]
     [SerializeField] private string[] dialogueLines = {
         "Bienvenido al primer nivel.",
@@ -51,6 +52,12 @@ public class DialogoN1 : MonoBehaviour
 
         // Desvanecer el fondo, texto y animación al final del diálogo
         yield return StartCoroutine(FadeOutTextAndBackground());
+
+        // Destruir el objeto después de terminar el diálogo
+        if (areaDialogoInicialCamara != null)
+        {
+            Destroy(areaDialogoInicialCamara);
+        }
     }
 
     private IEnumerator TypeLine(string line)
