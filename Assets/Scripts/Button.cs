@@ -1,68 +1,38 @@
-/*using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Button : MonoBehaviour
 {
+    [Header("Door Settings")]
+    public GameObject door; // La puerta que será desactivada
 
+    [Header("Switch Settings")]
+    public Sprite switchActivatedSprite; // Sprite que indica el estado activado
+    private SpriteRenderer spriteRenderer; // Componente SpriteRenderer del interruptor
 
-public GameObject door;
+    [Header("Audio Settings")]
+    public AudioSource audioSource; // Fuente de audio para el sonido de activación
 
+    private bool playerInRange = false;
+    private bool isActivated = false; // Para evitar múltiples activaciones
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        // Obtén el componente SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Obtén el componente AudioSource (si no se asigna manualmente)
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        
-        if(other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isActivated)
         {
-            door.SetActive(false);
-        }
-        else
-        {
-            door.SetActive(true);
-        }
-
-    }
-
-  /*  private void OnCollisionExit2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player"))
-        {
-            door.SetActive(true);
-        }
-    } */
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Button : MonoBehaviour
-{
-    public GameObject door;
-    private bool playerInRange = false;
-
-    public AudioSource audioSource;
-
-void Start()
-    {
-       audioSource = GetComponent<AudioSource>();
-    }
-    void Update()
-    {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            door.SetActive(false);
-            audioSource.Play();
+            ActivateSwitch();
         }
     }
 
@@ -74,14 +44,34 @@ void Start()
         }
     }
 
-   /*private void OnCollisionExit2D(Collision2D other)
+    private void OnCollisionExit2D(Collision2D other)
     {
-        if (playerInRange)
+        if (other.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
-            door.SetActive(true); // Opcional: Activa la puerta cuando el jugador salga del colisionador
         }
-    }*/ 
-    
-}
+    }
 
+    private void ActivateSwitch()
+    {
+        isActivated = true;
+
+        // Desactiva la puerta
+        if (door != null)
+        {
+            door.SetActive(false);
+        }
+
+        // Cambia el sprite del interruptor
+        if (spriteRenderer != null && switchActivatedSprite != null)
+        {
+            spriteRenderer.sprite = switchActivatedSprite;
+        }
+
+        // Reproduce el sonido (opcional)
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+    }
+}
