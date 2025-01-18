@@ -16,9 +16,15 @@ public class DoorInteraction : MonoBehaviour
     public float zoomDuration = 1f; // Duración del zoom
     public float zoomTarget = 3f; // Tamaño del zoom
 
+    [Header("Player Settings")]
+    public GameObject player; // Referencia al jugador
+    public Sprite backFacingSprite; // Sprite del jugador de espaldas
+
     private bool isPlayerInTrigger = false;
-    private float originalOrthographicSize; // Tamaño original de la cámara
     private bool isTransitioning = false;
+    private float originalOrthographicSize; // Tamaño original de la cámara
+    private SpriteRenderer playerSpriteRenderer; // Componente SpriteRenderer del jugador
+    private Animator playerAnimator; // Componente Animator del jugador (si existe)
 
     private void Start()
     {
@@ -29,8 +35,13 @@ public class DoorInteraction : MonoBehaviour
 
         if (fadeImage != null)
         {
-            // Asegurarse de que el fade image comienza desactivado
             fadeImage.gameObject.SetActive(false);
+        }
+
+        if (player != null)
+        {
+            playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
+            playerAnimator = player.GetComponent<Animator>(); // Obtiene el Animator (si existe)
         }
     }
 
@@ -52,15 +63,25 @@ public class DoorInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInTrigger && !isTransitioning)
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.UpArrow) && !isTransitioning)
         {
-            StartCoroutine(FadeAndZoomAndLoadLevel());
+            StartCoroutine(FadeZoomAndLoadLevel());
         }
     }
 
-    private IEnumerator FadeAndZoomAndLoadLevel()
+    private IEnumerator FadeZoomAndLoadLevel()
     {
         isTransitioning = true;
+
+        // Cambia el sprite del jugador
+        if (playerSpriteRenderer != null && backFacingSprite != null)
+        {
+            if (playerAnimator != null)
+            {
+                playerAnimator.enabled = false; // Desactiva el Animator para evitar conflictos
+            }
+            playerSpriteRenderer.sprite = backFacingSprite;
+        }
 
         // Inicia el zoom
         if (virtualCamera != null)
@@ -100,7 +121,6 @@ public class DoorInteraction : MonoBehaviour
                 yield return null;
             }
 
-            // Asegurarse de que el zoom llegue exactamente al objetivo
             virtualCamera.m_Lens.OrthographicSize = zoomTarget;
         }
     }
