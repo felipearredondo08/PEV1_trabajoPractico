@@ -6,6 +6,8 @@ TagManager:
   tags:
   - door
   - Rigidos
+  - fuego
+  - antorchaPiso
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Pprocesing
   - Player
   - Wall
-  - 
+  - fuego
   - 
   - 
   - 
