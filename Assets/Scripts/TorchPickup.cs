@@ -4,7 +4,7 @@ using UnityEngine.Rendering.Universal;
 public class TorchPickup : MonoBehaviour
 {
     public GameObject torchPrefab; // Prefab de la antorcha animada
-    public Vector3 relativePosition; // Posición relativa ajustable desde el inspector
+   
     private Transform playerTransform; // Referencia al transform del personaje
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,7 +19,7 @@ public class TorchPickup : MonoBehaviour
             GameObject torchInstance = Instantiate(torchPrefab, playerTransform);
 
             // Ajustar la posición relativa
-            torchInstance.transform.localPosition = relativePosition;
+           
 
             // Asignar la etiqueta "antorchaPiso"
             torchInstance.tag = "antorchaPiso";
