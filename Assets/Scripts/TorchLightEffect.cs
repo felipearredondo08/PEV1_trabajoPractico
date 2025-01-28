@@ -20,7 +20,8 @@ public class TorchCollisionHandler : MonoBehaviour
         if (collision.CompareTag("fuego") && light2D != null)
         {
             Debug.Log("Antorcha tocó el fuego");
-            light2D.intensity = 3.76f; // Aumentar la intensidad de la luz
+            light2D.intensity = 6.76f; // Aumentar la intensidad de la luz
+            
             Invoke("FadeOutLight", 10f); // Iniciar el apagado después de 10 segundos
         }
     }

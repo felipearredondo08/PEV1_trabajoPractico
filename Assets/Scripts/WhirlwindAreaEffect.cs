@@ -38,6 +38,7 @@ public class WhirlwindAreaEffect : MonoBehaviour
             if (playerAnimator != null)
             {
                 playerAnimator.enabled = originalAnimationState; // Restaurar estado original
+                playerAnimator.enabled = true;
             }
         }
     }
