@@ -1,87 +1,6 @@
-/*using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
-
-public class Enemy : MonoBehaviour
-{
-
-    //  public Animator animator;
- 
-    private Rigidbody2D rb;
-    public float movHor = 0f;
-    public float speed = 3f;
-
-    public bool isGroundFloor = true ;
-    public bool isGroundFront = false;
-
-    public LayerMask groundLayer;
-    public float frontGrndRayDist = 0.25f;
-    public float floorCheckY = 0.52f;
-
-    public float frontcheck = 0.51f;
-
-    public float frontDist = 0.00f;
-
-    public int scoreGive = 50;
-
-
-    private RaycastHit2D hit;
-
-    
-
-
-    void Start()
-    {
-       rb = GetComponent<Rigidbody2D>();
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //para no caer por los bordes
-
-        isGroundFloor = (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - floorCheckY, transform.position.z),
-        new Vector3(movHor, 0, 0) , frontGrndRayDist, groundLayer));
-
-        if (!isGroundFloor){
-            movHor = movHor * -1;
-        }
-
-        //choque con pared
-
-        if (Physics2D.Raycast(transform.position, new Vector3(movHor,0 , 0), frontcheck, groundLayer)){
-            movHor = movHor * -1;
-        }
-
-        //choque con compañere
-
-        hit = Physics2D.Raycast(new Vector3(transform.position.x + movHor*frontcheck, transform.position.y, transform.position.z),
-        new Vector3(movHor,0,0), frontDist);
-
-        if (hit != null){
-             if (hit.transform != null)
-                if (hit.transform.CompareTag("Enemy"))
-                movHor = movHor *-1;
-        }
-
-    }
-
-    void FixedUpdate() {
-        rb.velocity = new Vector2(movHor * speed, rb.velocity.y);
-    }
-
-    private void getKilled(){
-        gameObject.SetActive(false);
-    }
-
-
-} */
 using UnityEngine;
 
-public class Enemy2: MonoBehaviour
+public class Enemy2 : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float speed = 2f;
@@ -91,6 +10,9 @@ public class Enemy2: MonoBehaviour
     public float groundCheckDistance = 0.1f;
     public float groundCheckOffsetX = 0.2f;
     public float frontRayDistance = 0.3f;
+
+    public GameObject explosionParticlesPrefab; // Prefab de partículas de explosión
+    public float bounceForce = 5f; // Fuerza de rebote del jugador
 
     private void Start()
     {
@@ -148,6 +70,24 @@ public class Enemy2: MonoBehaviour
             // Comprobar si el jugador está cayendo (su velocidad Y es negativa)
             if (collision.relativeVelocity.y < 0)
             {
+                // Hacer que el jugador rebote
+                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    playerRb.velocity = new Vector2(playerRb.velocity.x, bounceForce);
+                }
+
+                // Instanciar partículas de explosión
+              //  if (explosionParticlesPrefab != null)
+               // {
+                 //   Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
+                //}
+
+                 if (explosionParticlesPrefab != null)
+               {
+                  GameObject explosion = Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
+                     Destroy(explosion, 2f); // 🔹 Se destruirá después de 2 segundos
+                  }
                 Destroy(gameObject);  // Destruir al enemigo
             }
         }
