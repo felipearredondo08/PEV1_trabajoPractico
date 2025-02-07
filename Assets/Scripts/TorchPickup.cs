@@ -4,27 +4,29 @@ using UnityEngine.Rendering.Universal;
 public class TorchPickup : MonoBehaviour
 {
     public GameObject torchPrefab; // Prefab de la antorcha animada
-   
-    private Transform playerTransform; // Referencia al transform del personaje
+    public AudioClip pickupSound; // Clip de sonido a reproducir
+    public float soundVolume = 1.0f; // Volumen del sonido
+
+    private Transform playerTransform;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verificar si el objeto que entra tiene la etiqueta "Player"
         if (collision.CompareTag("Player"))
         {
+            // Reproducir el sonido en la posición del objeto antes de destruirlo
+            if (pickupSound != null)
+            {
+                AudioSource.PlayClipAtPoint(pickupSound, transform.position, soundVolume);
+            }
+
             // Obtener el transform del personaje
             playerTransform = collision.transform;
 
             // Instanciar el prefab como hijo del personaje
             GameObject torchInstance = Instantiate(torchPrefab, playerTransform);
-
-            // Ajustar la posición relativa
-           
-
-            // Asignar la etiqueta "antorchaPiso"
             torchInstance.tag = "antorchaPiso";
 
-            // Asegurarse de que tenga un BoxCollider2D configurado como trigger
+            // Asegurar que tenga un BoxCollider2D como trigger
             BoxCollider2D boxCollider = torchInstance.GetComponent<BoxCollider2D>();
             if (boxCollider == null)
             {
@@ -36,18 +38,16 @@ public class TorchPickup : MonoBehaviour
             Light2D light2D = torchInstance.GetComponentInChildren<Light2D>();
             if (light2D != null)
             {
-                // Forzar a 0 tras una breve espera para garantizar que se aplique
                 StartCoroutine(SetLightIntensity(light2D, 0));
             }
 
-            // Desactivar o destruir el GameObject "antorchaPiso"
-            gameObject.SetActive(false); // O Destroy(gameObject);
+            // Desactivar o destruir el GameObject
+            Destroy(gameObject);
         }
     }
 
     private System.Collections.IEnumerator SetLightIntensity(Light2D light, float intensity)
     {
-        // Esperar un cuadro para asegurar que Unity procese la creación
         yield return null;
         light.intensity = intensity;
     }

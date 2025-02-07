@@ -21,7 +21,7 @@ TagManager:
   - Player
   - Wall
   - fuego
-  - 
+  - fondo
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 3867622601
+    locked: 0
+  - name: fondo
+    uniqueID: 2062351689
     locked: 0

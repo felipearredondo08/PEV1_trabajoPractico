@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -132,6 +132,152 @@ public class CartelImagen : MonoBehaviour
         {
             isPlayerInRange = false;
             OcultarCartel(); // Se oculta si el jugador se aleja
+        }
+    }
+}*/
+
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class CartelImagen : MonoBehaviour
+{
+    [SerializeField] private Image cartelImage; // Imagen del cartel (debe tener Color con Alpha)
+    [SerializeField] private AudioSource audioSource; // AudioSource para los sonidos
+    [SerializeField] private AudioClip openSound; // Sonido al abrir el cartel
+    [SerializeField] private AudioClip closeSound; // Sonido al cerrar el cartel
+    [SerializeField] private KeyCode interactionKey = KeyCode.E; // Tecla de interacción
+    [SerializeField] private float fadeDuration = 0.5f; // Duración del fade
+    [SerializeField] private float tiempoMostrando = 10f; // Tiempo antes de ocultarse automáticamente
+
+    private bool isPlayerInRange = false;
+    private bool isCartelVisible = false;
+    private Coroutine fadeCoroutine;
+    private Coroutine hideCoroutine;
+
+    private void Start()
+    {
+        // Asegurar que el cartel esté invisible al inicio
+        if (cartelImage != null)
+        {
+            Color color = cartelImage.color;
+            color.a = 0;
+            cartelImage.color = color;
+            cartelImage.enabled = false; // Desactiva el renderizado de la imagen
+        }
+    }
+
+    private void Update()
+    {
+       // if (isPlayerInRange && Input.GetKeyDown("interactionKey") )
+        if (isPlayerInRange && Input.GetButtonDown("Fire1"))
+        {
+            if (isCartelVisible)
+            {
+                OcultarCartel(true); // Cierre manual con sonido
+            }
+            else
+            {
+                MostrarCartel();
+            }
+        }
+    }
+
+    private void MostrarCartel()
+    {
+        isCartelVisible = true;
+        cartelImage.enabled = true; // Activa la imagen antes del fade
+
+        // Cancelar cualquier fade en progreso
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+
+        fadeCoroutine = StartCoroutine(FadeCanvas(0f, 1f));
+
+        // Reproducir sonido de apertura
+        if (audioSource != null && openSound != null)
+        {
+            audioSource.PlayOneShot(openSound);
+        }
+
+        // Iniciar el temporizador para ocultarlo después de X segundos
+        if (hideCoroutine != null)
+        {
+            StopCoroutine(hideCoroutine);
+        }
+        hideCoroutine = StartCoroutine(TemporizadorOcultar());
+    }
+
+    private void OcultarCartel(bool manualClose = false)
+    {
+        isCartelVisible = false;
+
+        // Cancelar cualquier fade en progreso
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+
+        fadeCoroutine = StartCoroutine(FadeCanvas(1f, 0f, true));
+
+        // Reproducir sonido de cierre solo si el cierre fue manual
+        if (manualClose && audioSource != null && closeSound != null)
+        {
+            audioSource.PlayOneShot(closeSound);
+        }
+
+        // Detener el temporizador si el jugador cierra el cartel antes
+        if (hideCoroutine != null)
+        {
+            StopCoroutine(hideCoroutine);
+            hideCoroutine = null;
+        }
+    }
+
+    private IEnumerator TemporizadorOcultar()
+    {
+        yield return new WaitForSeconds(tiempoMostrando);
+        OcultarCartel(false); // Cierra sin sonido porque es automático
+    }
+
+    private IEnumerator FadeCanvas(float startAlpha, float targetAlpha, bool disableAfter = false)
+    {
+        float elapsedTime = 0f;
+        Color color = cartelImage.color;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+            cartelImage.color = color;
+            yield return null;
+        }
+
+        color.a = targetAlpha;
+        cartelImage.color = color;
+
+        if (disableAfter)
+        {
+            cartelImage.enabled = false; // Desactiva la imagen después del fade out
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+            OcultarCartel(false); // Se oculta sin reproducir sonido
         }
     }
 }

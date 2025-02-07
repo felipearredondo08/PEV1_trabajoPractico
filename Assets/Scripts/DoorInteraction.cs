@@ -63,7 +63,7 @@ public class DoorInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.UpArrow) && !isTransitioning)
+        if (isPlayerInTrigger && Input.GetAxisRaw("Vertical") > 0 && !isTransitioning)
         {
             StartCoroutine(FadeZoomAndLoadLevel());
         }

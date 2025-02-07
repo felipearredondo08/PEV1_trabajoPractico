@@ -30,7 +30,7 @@ public class Button : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isActivated)
+        if (playerInRange && Input.GetKeyDown("Interact") && !isActivated)
         {
             ActivateSwitch();
         }
