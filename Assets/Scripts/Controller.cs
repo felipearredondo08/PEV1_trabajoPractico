@@ -145,15 +145,15 @@ public class Controller : MonoBehaviour
     public Vector2 direccion;
 
     public int contadorMoneditas = 0;
-    public float movementSpeed = 100; 
-    public float jumpForce = 100f; 
+    public float movementSpeed = 100;
+    public float jumpForce = 100f;
 
     private Rigidbody2D rbody;
     public bool isGrounded = false;
     public bool isMoving = false;
-    public float groundRayDist = 1.5f; 
-    public LayerMask groundLayer; 
-    public float radius = 0.0f; 
+    public float groundRayDist = 1.5f;
+    public LayerMask groundLayer;
+    public float radius = 0.0f;
 
     private Animator anim;
     private AudioSource audioSource;
@@ -163,14 +163,25 @@ public class Controller : MonoBehaviour
     private float coyoteTimeCounter; // Contador de coyote time
 
     // WIND CONTROLLER
-    public Vector2 windDirection; 
-    public float windForce = 0f; 
-    public float minWindForce = 5000f; 
-    public float maxWindForce = 10000f; 
-    public float windChangeInterval = 3f; 
-    private float windChangeTimer = 0f;     
+    /*public Vector2 windDirection;
+    public float windForce = 0f;
+    public float minWindForce = 5000f;
+    public float maxWindForce = 10000f;
+    public float windChangeInterval = 3f;
+    private float windChangeTimer = 0f;
+
+    */
 
     public static Controller instance;
+
+    bool agarrado = false;
+    public Vector3 offset;
+
+    public float multiplicadorChoque = 10;
+
+    Transform tramoAgarrado;
+
+    public float velBalanceo = 10f;
 
     void Start()
     {
@@ -183,13 +194,15 @@ public class Controller : MonoBehaviour
     {
         instance = this;
 
-      
+
     }
 
-////////////////////////////////////////////////////
-    
+    ////////////////////////////////////////////////////
+
     void Update()
     {
+        float movY = Input.GetAxisRaw("Vertical");
+        float movX = Input.GetAxisRaw("Horizontal");
         flip();
         Walk();
 
@@ -218,11 +231,90 @@ public class Controller : MonoBehaviour
         anim.SetBool("isGrounded", isGrounded);
 
         // Actualizar el temporizador para el cambio de viento
-        windChangeTimer += Time.deltaTime;
+       /* windChangeTimer += Time.deltaTime;
         if (windChangeTimer >= windChangeInterval)
         {
             ChangeWind();
             windChangeTimer = 0f;
+        }*/
+
+        if (agarrado)
+        {
+            //posicionar y rotar igual al tramo
+            transform.position = tramoAgarrado.transform.position + offset;
+            transform.rotation = tramoAgarrado.transform.rotation;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (movY < 0)
+                {
+                    seSuelta(); // Solo se suelta sin saltar si el jugador presiona hacia abajo
+                }
+                else
+                {
+                    seSueltaYSalta();
+                    Jump(); // Salta si no está presionando hacia abajo
+                }
+            }
+
+            tramoAgarrado.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(movX * velBalanceo, 0);
+        }
+        // else{
+        //   if (Input.GetButtonDown("Jump")) Jump();
+        //}
+    }
+
+    void seSuelta()
+    {
+        agarrado = false;
+        rbody.isKinematic = false;
+        rbody.velocity = new Vector2(0, 0);
+        transform.rotation = Quaternion.identity;
+    }
+
+    void seSueltaYSalta()
+    {
+        agarrado = false;
+        rbody.isKinematic = false;
+
+        transform.rotation = Quaternion.identity;
+    }
+
+    /*private void OnTriggerStay2D(Collider2D other) {
+        
+        if(Input.GetButtonDown("Fire1")){
+
+            agarrado = true;
+
+            //se agarra de la soga
+
+            tramoAgarrado = other.transform;
+
+            other.GetComponent<Rigidbody2D>().AddForce(rbody.velocity * multiplicadorChoque, ForceMode2D.Impulse);
+
+
+           
+
+            //suspender la gravedad
+            rbody.isKinematic = true;
+
+            //dar impulso a la soga
+
+
+
+        }
+    }¨*/
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Cuerda") && Input.GetButtonDown("Fire1"))
+        {
+            agarrado = true;
+            tramoAgarrado = other.transform;
+            other.GetComponent<Rigidbody2D>().AddForce(rbody.velocity * multiplicadorChoque, ForceMode2D.Impulse);
+
+            // Suspender la gravedad
+            rbody.isKinematic = true;
         }
     }
 
@@ -231,19 +323,19 @@ public class Controller : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
         isMoving = horizontalInput != 0;
-        
+
     }
 
     public void Jump()
     {
         // Permitir el salto si está en el suelo o si aún queda tiempo de Coyote Time
-        if (coyoteTimeCounter <= 0) return; 
+        if (coyoteTimeCounter <= 0) return;
 
         // Aplica la fuerza de salto
         rbody.velocity = Vector2.up * jumpForce;
 
-        // Aplica la fuerza del viento
-        rbody.AddForce(windDirection * windForce, ForceMode2D.Impulse);
+       /* // Aplica la fuerza del viento
+        rbody.AddForce(windDirection * windForce, ForceMode2D.Impulse);*/
         audioSource.Play();
 
         anim.SetTrigger("isJump");
@@ -266,7 +358,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    void ChangeWind()
+   /* void ChangeWind()
     {
         windDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
         windForce = Random.Range(minWindForce, maxWindForce);
@@ -284,5 +376,5 @@ public class Controller : MonoBehaviour
             Gizmos.DrawLine(startPosition, startPosition + windVector);
             Gizmos.DrawSphere(startPosition + windVector, 0.2f);
         }
-    }
+    }*/
 }

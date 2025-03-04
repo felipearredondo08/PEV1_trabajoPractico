@@ -10,6 +10,7 @@ TagManager:
   - antorchaPiso
   - Enemy
   - Ground
+  - Cuerda
   layers:
   - Default
   - TransparentFX
