@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BrewedInk.CRT
 {
 	
-	// [ImageEffectAllowedInSceneView] // ATTENTION: Uncomment this to see the effect in scene view.
+	[ImageEffectAllowedInSceneView] // ATTENTION: Uncomment this to see the effect in scene view.
 	[RequireComponent(typeof(Camera))]
 	[ExecuteAlways]
 	public class CRTCameraBehaviour : MonoBehaviour
