@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class WhirlwindAreaEffect : MonoBehaviour
 {
@@ -42,4 +42,4 @@ public class WhirlwindAreaEffect : MonoBehaviour
             }
         }
     }
-}
+}*/
