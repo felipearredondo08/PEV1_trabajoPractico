@@ -4,7 +4,8 @@ using UnityEngine.Rendering.Universal;
 public class TorchPickup : MonoBehaviour
 {
     public GameObject torchPrefab; // Prefab de la antorcha animada
-    public AudioClip pickupSound; // Clip de sonido a reproducir
+    public GameObject explosionParticlesPrefab; // Prefab del Particle System para la explosión
+    public AudioClip pickupSound; // Sonido que se reproducirá (ahora directamente en el Inspector)
     public float soundVolume = 1.0f; // Volumen del sonido
 
     private Transform playerTransform;
@@ -13,10 +14,17 @@ public class TorchPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Reproducir el sonido en la posición del objeto antes de destruirlo
+            // Reproducir sonido en la posición de la antorcha, independiente del GameObject
             if (pickupSound != null)
             {
                 AudioSource.PlayClipAtPoint(pickupSound, transform.position, soundVolume);
+            }
+
+            // Instanciar la explosión de partículas
+            if (explosionParticlesPrefab != null)
+            {
+                GameObject explosion = Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
+                explosion.SetActive(true); // Activar el Particle System
             }
 
             // Obtener el transform del personaje

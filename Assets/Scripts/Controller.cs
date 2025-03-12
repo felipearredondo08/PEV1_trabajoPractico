@@ -43,6 +43,10 @@ public class Controller : MonoBehaviour
 
     public float velBalanceo = 10f;
 
+    // Nuevas variables para los sprites de balanceo
+    public Sprite spriteBalanceoDerecha; // Sprite cuando se balancea a la derecha
+    public Sprite spriteBalanceoIzquierda; // Sprite cuando se balancea a la izquierda
+
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
@@ -116,9 +120,22 @@ public class Controller : MonoBehaviour
 
         if (agarrado)
         {
+            // Desactivar las animaciones normales
+            anim.enabled = false;
+
             // Posicionar y rotar igual al tramo
             transform.position = tramoAgarrado.transform.position + offset;
             transform.rotation = tramoAgarrado.transform.rotation;
+
+            // Cambiar el sprite según la dirección del balanceo
+            if (movX > 0)
+            {
+                spr.sprite = spriteBalanceoDerecha; // Sprite para balanceo a la derecha
+            }
+            else if (movX < 0)
+            {
+                spr.sprite = spriteBalanceoIzquierda; // Sprite para balanceo a la izquierda
+            }
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -143,6 +160,8 @@ public class Controller : MonoBehaviour
         rbody.isKinematic = false;
         rbody.velocity = new Vector2(0, 0);
         transform.rotation = Quaternion.identity;
+        spr.sprite = null; // Restablecer el sprite al soltarse
+        anim.enabled = true; // Reactivar las animaciones normales
     }
 
     void seSueltaYSalta()
@@ -150,6 +169,8 @@ public class Controller : MonoBehaviour
         agarrado = false;
         rbody.isKinematic = false;
         transform.rotation = Quaternion.identity;
+        spr.sprite = null; // Restablecer el sprite al soltarse
+        anim.enabled = true; // Reactivar las animaciones normales
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -162,6 +183,9 @@ public class Controller : MonoBehaviour
 
             // Suspender la gravedad
             rbody.isKinematic = true;
+
+            // Desactivar las animaciones normales
+            anim.enabled = false;
         }
     }
 
