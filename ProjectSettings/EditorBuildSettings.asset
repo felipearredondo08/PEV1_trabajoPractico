@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LogoMostron.unity
+    guid: ea769c25d6f8d2e488d87491eaaecf47
+  - enabled: 1
     path: Assets/Scenes/MenuInicial.unity
     guid: 8d806c5da05ee2148bd8b35098ec54aa
   - enabled: 1
@@ -14,12 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 49623c442ebcf794e9a12a97bb6bdb14
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Nivel1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Nivel2.unity
     guid: 21dd76a18c7190d43b93d29faa010930
+  - enabled: 1
+    path: Assets/Scenes/Nivel3Cueva.unity
+    guid: c46eb887b55b9804eb7165f6cc0ceacf
   - enabled: 1
     path: Assets/Scenes/gameover.unity
     guid: 52fe74ec0dbc39346b10b51c56b0a985
