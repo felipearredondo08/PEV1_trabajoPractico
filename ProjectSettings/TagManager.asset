@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Ground
   - Cuerda
+  - Opciones
   layers:
   - Default
   - TransparentFX
