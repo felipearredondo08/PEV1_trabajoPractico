@@ -113,6 +113,18 @@ public class ZoomComienzoAnimacionNivel4 : MonoBehaviour
     }
 }*/
 
+
+
+
+
+
+
+
+
+
+
+
+ ///////////////////////////Este funciona perfecto pero no tiene el fade in //////////////
 using UnityEngine;
 using Cinemachine;
 using System.Collections;
@@ -193,4 +205,5 @@ public class ZoomComienzoAnimacionNivel4 : MonoBehaviour
         virtualCamera.m_Lens.OrthographicSize = targetZoom;
     }
 }
+//////////////////////////////////////////////////////////////////
 

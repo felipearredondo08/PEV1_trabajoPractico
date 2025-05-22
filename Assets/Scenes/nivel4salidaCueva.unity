@@ -2206,7 +2206,7 @@ Tilemap:
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -255408423, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
-      m_AnimationSpeed: 3.719616
+      m_AnimationSpeed: 3.1472602
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 1, y: -1, z: 0}
@@ -2216,7 +2216,7 @@ Tilemap:
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -255408423, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
-      m_AnimationSpeed: 3.0547647
+      m_AnimationSpeed: 3.4017363
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 2, y: -1, z: 0}
@@ -2228,7 +2228,7 @@ Tilemap:
       - {fileID: 830207277, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: 326781620, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: -576691483, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
-      m_AnimationSpeed: 5.3089185
+      m_AnimationSpeed: 4.6688633
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 24, y: 1, z: 0}
@@ -2240,7 +2240,7 @@ Tilemap:
       - {fileID: 830207277, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: 326781620, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: -576691483, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
-      m_AnimationSpeed: 4.8522453
+      m_AnimationSpeed: 4.4110975
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 26, y: 1, z: 0}
@@ -2250,7 +2250,7 @@ Tilemap:
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -255408423, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
-      m_AnimationSpeed: 3.5749469
+      m_AnimationSpeed: 4.476037
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -26, y: 4, z: 0}
@@ -2262,7 +2262,7 @@ Tilemap:
       - {fileID: 830207277, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: 326781620, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: -576691483, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
-      m_AnimationSpeed: 4.3967133
+      m_AnimationSpeed: 5.009145
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -25, y: 4, z: 0}
@@ -2272,7 +2272,7 @@ Tilemap:
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -255408423, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
       - {fileID: -1060147700, guid: 38e0a591a22c0d44ba4308e5ad3532d2, type: 3}
-      m_AnimationSpeed: 4.606051
+      m_AnimationSpeed: 3.8569002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -3157,7 +3157,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.31764707}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.42745098}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -3804,7 +3804,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 18.45
+      scalar: 29.49
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7699,7 +7699,7 @@ Transform:
   m_GameObject: {fileID: 634275563}
   serializedVersion: 2
   m_LocalRotation: {x: -0.017402435, y: -0.17004438, z: -0.10031042, w: 0.9801632}
-  m_LocalPosition: {x: -1.46, y: 4.46, z: -0.01927213}
+  m_LocalPosition: {x: 2.29, y: 3.68, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7826,7 +7826,7 @@ Tilemap:
       - {fileID: 830207277, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: 326781620, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
       - {fileID: -576691483, guid: 44df0c92e027058468a44b8440c1d21f, type: 3}
-      m_AnimationSpeed: 5.854195
+      m_AnimationSpeed: 4.103002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -24, y: 1, z: 0}
@@ -8323,6 +8323,53 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 732278509}
   m_SourcePrefab: {fileID: 100100000, guid: ba6120f70ad9e014ea80255ad0da8ce0, type: 3}
+--- !u!1 &721512772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721512774}
+  - component: {fileID: 721512775}
+  m_Layer: 0
+  m_Name: FadeController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &721512774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721512772}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.192177, y: 12.33025, z: -0.15483873}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721512775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721512772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e72f591a5b5326428589d60a760b963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeCanvasGroup: {fileID: 1661726899}
+  fadeDuration: 2
+  maxAlpha: 1
 --- !u!1 &732278504 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7871825541232733397, guid: ba6120f70ad9e014ea80255ad0da8ce0, type: 3}
@@ -37748,7 +37795,7 @@ GameObject:
   - component: {fileID: 1661726900}
   - component: {fileID: 1661726899}
   m_Layer: 5
-  m_Name: Image
+  m_Name: FadeIN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49123,3 +49170,4 @@ SceneRoots:
   - {fileID: 911789264}
   - {fileID: 1416595563}
   - {fileID: 1249453624}
+  - {fileID: 721512774}
