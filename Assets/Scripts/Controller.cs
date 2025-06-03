@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
@@ -43,9 +44,22 @@ public class Controller : MonoBehaviour
 
     public float velBalanceo = 10f;
 
+    public float fuezaGolpe;
+
+    private bool puedeMoverse = true;
+
     // Nuevas variables para los sprites de balanceo
     public Sprite spriteBalanceoDerecha; // Sprite cuando se balancea a la derecha
     public Sprite spriteBalanceoIzquierda; // Sprite cuando se balancea a la izquierda
+    public float maxVelYDespuesDelGolpe = 5f;
+
+    public Sprite spriteGolpeado;
+
+    public float duracionGolpe = 0.5f; // Tiempo en segundos que se verá el sprite golpeado
+
+    private bool estaGolpeado = false;
+
+
 
     void Start()
     {
@@ -59,6 +73,8 @@ public class Controller : MonoBehaviour
     {
         instance = this;
     }
+
+
 
     void Update()
     {
@@ -152,6 +168,11 @@ public class Controller : MonoBehaviour
 
             tramoAgarrado.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(movX * velBalanceo, 0);
         }
+
+        if (puedeMoverse == false)
+        {
+            return;
+        }
     }
 
     void seSuelta()
@@ -189,8 +210,17 @@ public class Controller : MonoBehaviour
         }
     }
 
+    /*public void Walk()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
+        isMoving = horizontalInput != 0;
+    }*/
+
     public void Walk()
     {
+        if (!puedeMoverse) return;
+
         float horizontalInput = Input.GetAxis("Horizontal");
         rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
         isMoving = horizontalInput != 0;
@@ -233,4 +263,162 @@ public class Controller : MonoBehaviour
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
+
+    public bool EstaEnSuelo()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, Vector2.down, groundRayDist, groundLayer);
+
+        if (hit.collider != null)
+        {
+            Debug.DrawRay(transform.position, Vector2.down * groundRayDist, Color.green);
+            return true;
+        }
+
+        Debug.DrawRay(transform.position, Vector2.down * groundRayDist, Color.red);
+        return false;
+    }
+
+    /* public void AplicarGolpe()
+     {
+
+         rbody.velocity = new Vector2(rbody.velocity.x, 0);
+         Vector2 direccionGolpe;
+
+         puedeMoverse = false;
+
+         // Cambiar al sprite de golpeado y desactivar animaciones
+         spr.sprite = spriteGolpeado;
+         anim.enabled = false;
+
+         if (rbody.velocity.x > 0)
+         {
+             direccionGolpe = new Vector2(-1, 1);
+
+         }
+         else
+         {
+             direccionGolpe = new Vector2(1, 1);
+         }
+
+         rbody.AddForce(direccionGolpe * fuezaGolpe);
+
+
+
+        if (rbody.velocity.y > maxVelYDespuesDelGolpe)
+        {
+            rbody.velocity = new Vector2(rbody.velocity.x, maxVelYDespuesDelGolpe); //supuestamente esta linea evitaria que se vaya volando alto pipina.
+             
+         }
+
+           StopAllCoroutines(); // Detiene otras posibles corutinas para evitar solapamientos
+             StartCoroutine(CambiarSpritePorGolpe()); ////////////////////////////////////////////////////////////////////////////////
+
+         StartCoroutine(EsperarYActivarMovimiento());
+     }
+
+     IEnumerator CambiarSpritePorGolpe()
+{
+    anim.enabled = false; // Desactiva el animator para mostrar solo el sprite golpeado
+    spr.sprite = spriteGolpeado;
+
+    yield return new WaitForSeconds(duracionGolpe);
+
+    anim.enabled = true; // Reactiva animaciones normales
+    spr.sprite = null;   // Deja que el animator recupere el sprite según el estado
+}
+
+   
+    IEnumerator EsperarYActivarMovimiento()
+  {
+      yield return new WaitForSeconds(0.1f);
+      while (!EstaEnSuelo())
+      {
+          yield return null;
+      }
+
+      puedeMoverse = true;
+
+      // Restaurar animaciones normales
+      spr.sprite = null; // Deja que el Animator controle el sprite
+      anim.enabled = true;
+  }*/
+
+    public void AplicarGolpe()
+    {
+        rbody.velocity = new Vector2(rbody.velocity.x, 0);
+        Vector2 direccionGolpe;
+
+        puedeMoverse = false;
+
+        // Cancelar animaciones antes del sprite
+        anim.enabled = false;
+        spr.sprite = spriteGolpeado;
+
+        // Determinar dirección del golpe
+        if (rbody.velocity.x > 0)
+        {
+            direccionGolpe = new Vector2(-1, 1);
+        }
+        else
+        {
+            direccionGolpe = new Vector2(1, 1);
+        }
+
+        rbody.AddForce(direccionGolpe * fuezaGolpe);
+
+        if (rbody.velocity.y > maxVelYDespuesDelGolpe)
+        {
+            rbody.velocity = new Vector2(rbody.velocity.x, maxVelYDespuesDelGolpe);
+        }
+
+        // Solo una corrutina que controla todo el proceso
+        StopAllCoroutines();
+        StartCoroutine(ProcesarGolpe());
+        EsperarYActivarMovimiento();
+    }
+
+    IEnumerator ProcesarGolpe()
+    {
+        // Mostrar sprite golpeado por un tiempo fijo
+        yield return new WaitForSeconds(duracionGolpe);
+
+        // Esperar a que toque el suelo
+        while (!EstaEnSuelo())
+        {
+            yield return null;
+        }
+
+        // Restaurar control y animaciones
+        puedeMoverse = true;
+        spr.sprite = null;
+        anim.enabled = true;
+    }
+
+public IEnumerator CambiarSpritePorGolpe()
+{
+    anim.enabled = false; // Desactiva el animator para mostrar solo el sprite golpeado
+    spr.sprite = spriteGolpeado;
+
+    yield return new WaitForSeconds(duracionGolpe);
+
+    anim.enabled = true; // Reactiva animaciones normales
+    spr.sprite = null;   // Deja que el animator recupere el sprite según el estado
+}
+IEnumerator EsperarYActivarMovimiento()
+  {
+      yield return new WaitForSeconds(0.1f);
+      while (!EstaEnSuelo())
+      {
+          yield return null;
+      }
+
+      puedeMoverse = true;
+
+      // Restaurar animaciones normales
+      spr.sprite = null; // Deja que el Animator controle el sprite
+      anim.enabled = true;
+  }
+
+
+
 }
