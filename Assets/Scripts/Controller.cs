@@ -354,6 +354,9 @@ public class Controller : MonoBehaviour
         anim.enabled = false;
         spr.sprite = spriteGolpeado;
 
+        anim.SetTrigger("Damage");
+        //audioSource.PlayOneShot
+
         // Determinar dirección del golpe
         if (rbody.velocity.x > 0)
         {
@@ -391,6 +394,7 @@ public class Controller : MonoBehaviour
         // Restaurar control y animaciones
         puedeMoverse = true;
         spr.sprite = null;
+     
         anim.enabled = true;
     }
 
