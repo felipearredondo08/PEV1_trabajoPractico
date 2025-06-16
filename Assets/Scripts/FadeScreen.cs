@@ -14,6 +14,7 @@ public class FadeScreen : MonoBehaviour
         if (fadeImage != null)
         {
             // Asegurarse de que la imagen comienza totalmente transparente
+            fadeImage.gameObject.SetActive(true);
             Color color = fadeImage.color;
             color.a = 0;
             fadeImage.color = color;
