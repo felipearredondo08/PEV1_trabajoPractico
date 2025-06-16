@@ -154,6 +154,8 @@ private void OnTriggerEnter2D(Collider2D other)
             if (controllerJugador != null)
             {
                 controllerJugador.AplicarGolpe();
+                    
+                    other.GetComponent<VidaJugador>().restarVida();
 
                 // 🔹 Llamar a la corrutina desde el enemigo
                 controllerJugador.StartCoroutine(controllerJugador.CambiarSpritePorGolpe());

@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - Cuerda
   - Opciones
+  - contadorCorazones
   layers:
   - Default
   - TransparentFX

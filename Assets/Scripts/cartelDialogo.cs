@@ -160,6 +160,7 @@ public class CartelImagen : MonoBehaviour
         // Asegurar que el cartel esté invisible al inicio
         if (cartelImage != null)
         {
+            cartelImage.gameObject.SetActive(true);
             Color color = cartelImage.color;
             color.a = 0;
             cartelImage.color = color;

@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 516200434142726028}
+  - component: {fileID: 5841515705006672107}
   - component: {fileID: 7175063190196880882}
-  - component: {fileID: 2019701128006076882}
   - component: {fileID: 7758390027929701133}
   - component: {fileID: 5536377093813085555}
   - component: {fileID: 8248373679664351177}
   - component: {fileID: 787843720256268963}
+  - component: {fileID: 69708804363574349}
   m_Layer: 0
   m_Name: Personaje
   m_TagString: Player
@@ -37,6 +38,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5841515705006672107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7785398454057168771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5a6d74e52e99b45825c7c8a8974b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direccion: {x: 0, y: 0}
+  contadorMoneditas: 0
+  movementSpeed: 0.8
+  jumpForce: 2.6
+  isGrounded: 0
+  isMoving: 0
+  groundRayDist: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  radius: 0.03
+  coyoteTime: 0.2
+  fallDelay: 0.2
+  fallSprite: {fileID: 21300000, guid: 552a68b921f5c3049a7709bbf3c7eb57, type: 3}
+  offset: {x: 0, y: 0, z: 0}
+  multiplicadorChoque: 10
+  velBalanceo: 10
+  fuezaGolpe: 0
+  spriteBalanceoDerecha: {fileID: 0}
+  spriteBalanceoIzquierda: {fileID: 0}
+  maxVelYDespuesDelGolpe: 5
+  spriteGolpeado: {fileID: 0}
+  duracionGolpe: 0.5
 --- !u!50 &7175063190196880882
 Rigidbody2D:
   serializedVersion: 4
@@ -51,7 +87,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0.6
   m_Material: {fileID: 6200000, guid: 820b3247df42d4f45a303b232f0bb4a2, type: 2}
   m_IncludeLayers:
@@ -64,33 +100,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2019701128006076882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7785398454057168771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89a8674072378643a4f5cb104b321a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contadorMoneditas: 0
-  movementSpeed: 0.8
-  jumpForce: 2.6
-  isGrounded: 0
-  isMoving: 0
-  groundRayDist: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  radius: 0.03
-  windDirection: {x: 0, y: 0}
-  windForce: 0
-  minWindForce: 0
-  maxWindForce: 0
-  windChangeInterval: 3
 --- !u!212 &7758390027929701133
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -305,3 +314,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.04114914, y: 0.072732925}
   m_EdgeRadius: 0.016
+--- !u!114 &69708804363574349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7785398454057168771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2f733b040f94243882939831f97f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
