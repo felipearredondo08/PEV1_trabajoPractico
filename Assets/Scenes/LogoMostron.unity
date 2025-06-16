@@ -227,7 +227,7 @@ MonoBehaviour:
   displayTime: 1
   fadeOutSpeed: 3
   delayBeforeNextScene: 2
-  nextSceneName: MenuInicial
+  nextSceneName: MenuPrueba
 --- !u!4 &1040906688
 Transform:
   m_ObjectHideFlags: 0

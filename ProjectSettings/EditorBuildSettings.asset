@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LogoMostron.unity
     guid: ea769c25d6f8d2e488d87491eaaecf47
   - enabled: 0
