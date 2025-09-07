@@ -9,7 +9,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     public float offsetX = 0.0f;
     public float offsetY = 0.0f;
     public Camera parallaxCamera;
-    public MonoBehaviour parallaxScript; // Referencia al script de parallax (MonoBehaviour para flexibilidad)
+    //public MonoBehaviour parallaxScript; // Referencia al script de parallax (MonoBehaviour para flexibilidad)
 
     private float initialZoomSize;
     private float initialScreenX;
@@ -64,7 +64,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             targetScreenX = initialScreenX + offsetX; // Basado en el valor inicial
             targetScreenY = initialScreenY + offsetY;
 
-            // Desactivar el parallax
+           /* // Desactivar el parallax
             if (parallaxCamera != null)
             {
                 parallaxCamera.enabled = false;
@@ -72,7 +72,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             if (parallaxScript != null)
             {
                 parallaxScript.enabled = false;
-            }
+            }*/
         }
     }
 
@@ -85,7 +85,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             targetScreenX = initialScreenX;
             targetScreenY = initialScreenY;
 
-            // Activar el parallax
+           /* // Activar el parallax
             if (parallaxCamera != null)
             {
                 parallaxCamera.enabled = true;
@@ -93,7 +93,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             if (parallaxScript != null)
             {
                 parallaxScript.enabled = true;
-            }
+            }*/
         }
     }
 }

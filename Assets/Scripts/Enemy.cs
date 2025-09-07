@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
     }
 
     private void Flip()
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
                 Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
                 if (playerRb != null)
                 {
-                    playerRb.velocity = new Vector2(playerRb.velocity.x, bounceForce);
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, bounceForce);
                 }
 
                 // Instanciar partículas de explosión
@@ -148,7 +148,7 @@ private void OnTriggerEnter2D(Collider2D other)
     {
         // Aplicar el golpe solo si NO está cayendo
         Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
-        if (playerRb != null && playerRb.velocity.y >= 0)
+        if (playerRb != null && playerRb.linearVelocity.y >= 0)
         {
             Controller controllerJugador = other.GetComponent<Controller>();
             if (controllerJugador != null)

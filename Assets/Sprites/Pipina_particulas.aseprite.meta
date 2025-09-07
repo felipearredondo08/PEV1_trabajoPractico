@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -83,6 +84,8 @@ ScriptedImporter:
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
+    generateIndividualEvents: 1
+    generateSpriteAtlas: 1
   asepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
@@ -96,6 +99,8 @@ ScriptedImporter:
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
+    generateIndividualEvents: 1
+    generateSpriteAtlas: 1
   importFileNodeState: 1
   platformSettingsDirtyTick: 0
   textureAssetName: 
@@ -105,6 +110,7 @@ ScriptedImporter:
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -126,6 +132,7 @@ ScriptedImporter:
     pivot: {x: 0.052000005, y: 0.75000006}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -146,6 +153,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 183
@@ -166,6 +174,7 @@ ScriptedImporter:
     pivot: {x: 0.4090909, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 25
@@ -186,6 +195,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 204
@@ -206,6 +216,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 225
@@ -226,6 +237,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 158
@@ -246,6 +258,7 @@ ScriptedImporter:
     pivot: {x: 0.59090906, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 44
@@ -266,6 +279,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 179
@@ -286,6 +300,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 200
@@ -306,6 +321,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 137
@@ -326,6 +342,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 221
@@ -346,6 +363,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -366,6 +384,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 25
@@ -386,6 +405,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 46
@@ -406,6 +426,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 137
@@ -426,6 +447,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 67
@@ -446,6 +468,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 88
@@ -466,6 +489,7 @@ ScriptedImporter:
     pivot: {x: 0.43333334, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 137
@@ -486,6 +510,7 @@ ScriptedImporter:
     pivot: {x: 0.43333334, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 160
@@ -506,6 +531,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 109
@@ -526,6 +552,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 130
@@ -546,6 +573,7 @@ ScriptedImporter:
     pivot: {x: 0.42307693, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 151
@@ -566,6 +594,7 @@ ScriptedImporter:
     pivot: {x: 0.42307693, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 172
@@ -586,6 +615,7 @@ ScriptedImporter:
     pivot: {x: 0.42307693, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 193
@@ -606,6 +636,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 214
@@ -626,6 +657,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 235
@@ -646,6 +678,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -666,6 +699,7 @@ ScriptedImporter:
     pivot: {x: 0.4090909, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 63
@@ -682,15 +716,21 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 63, y: 95}
   spriteSheetImportData: []
+  tileSetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -382355212
+    uuid:
+      value0: 85585348
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 85585348
     name: Pipina_particulas
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Pipina_particulas_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -699,7 +739,7 @@ ScriptedImporter:
         width: 125
         height: 60
       spriteId: 96b465c1a53fd3043a393d3da915d6a3
-    - name: Pipina_particulas_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -708,7 +748,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 26bdf31d069040d44838e6f81c539150
-    - name: Pipina_particulas_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -717,7 +757,7 @@ ScriptedImporter:
         width: 11
         height: 15
       spriteId: 51bca9418af9de242b59c19b339385fa
-    - name: Pipina_particulas_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -726,7 +766,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: a6932efbb2d98f74884f85d8bc74c176
-    - name: Pipina_particulas_Frame_4
+    - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
@@ -735,7 +775,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 9c0fca01c4d29c94e8b46db38933b75f
-    - name: Pipina_particulas_Frame_5
+    - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
@@ -744,7 +784,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 0c10bb0016895f241aa19b74eb387c8d
-    - name: Pipina_particulas_Frame_6
+    - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
@@ -753,7 +793,7 @@ ScriptedImporter:
         width: 11
         height: 15
       spriteId: 157a5276b26c1ba48af404e11c38d61d
-    - name: Pipina_particulas_Frame_7
+    - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
@@ -762,7 +802,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 8ae26c351d1cdc249ac9182813fa44d0
-    - name: Pipina_particulas_Frame_8
+    - name: Frame_8
       frameIndex: 8
       additiveSortOrder: 0
       cellRect:
@@ -771,7 +811,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 9c7e4ac36b8f72c4cb22f182328561f6
-    - name: Pipina_particulas_Frame_9
+    - name: Frame_9
       frameIndex: 9
       additiveSortOrder: 0
       cellRect:
@@ -780,7 +820,7 @@ ScriptedImporter:
         width: 13
         height: 16
       spriteId: 3db2ca1544ddec2469be584b7cb6fb06
-    - name: Pipina_particulas_Frame_10
+    - name: Frame_10
       frameIndex: 10
       additiveSortOrder: 0
       cellRect:
@@ -789,7 +829,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 45c8f7d13c41bad48aaebcdf103be376
-    - name: Pipina_particulas_Frame_11
+    - name: Frame_11
       frameIndex: 11
       additiveSortOrder: 0
       cellRect:
@@ -798,7 +838,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 71aa3ca93f1ab8640a0764ba5bb63dbe
-    - name: Pipina_particulas_Frame_12
+    - name: Frame_12
       frameIndex: 12
       additiveSortOrder: 0
       cellRect:
@@ -807,7 +847,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: e8a268e1dc5d0e943ac7d14432eac38d
-    - name: Pipina_particulas_Frame_13
+    - name: Frame_13
       frameIndex: 13
       additiveSortOrder: 0
       cellRect:
@@ -816,7 +856,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 7166613127b41f34f85badceb9dd2ff0
-    - name: Pipina_particulas_Frame_14
+    - name: Frame_14
       frameIndex: 14
       additiveSortOrder: 0
       cellRect:
@@ -825,7 +865,7 @@ ScriptedImporter:
         width: 13
         height: 13
       spriteId: 9cab6da937afe6644a7dd9bf563794f1
-    - name: Pipina_particulas_Frame_15
+    - name: Frame_15
       frameIndex: 15
       additiveSortOrder: 0
       cellRect:
@@ -834,7 +874,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: a2ecbf53fa2be3648b570ad048bb5325
-    - name: Pipina_particulas_Frame_16
+    - name: Frame_16
       frameIndex: 16
       additiveSortOrder: 0
       cellRect:
@@ -843,7 +883,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 9c4203302a5ba2e49bb6c1852b237d78
-    - name: Pipina_particulas_Frame_17
+    - name: Frame_17
       frameIndex: 17
       additiveSortOrder: 0
       cellRect:
@@ -852,7 +892,7 @@ ScriptedImporter:
         width: 15
         height: 15
       spriteId: 4432e7e665262454eb6d0d520b148af3
-    - name: Pipina_particulas_Frame_18
+    - name: Frame_18
       frameIndex: 18
       additiveSortOrder: 0
       cellRect:
@@ -861,7 +901,7 @@ ScriptedImporter:
         width: 15
         height: 15
       spriteId: 4c2e424c927d84b48860c932cfe0a627
-    - name: Pipina_particulas_Frame_19
+    - name: Frame_19
       frameIndex: 19
       additiveSortOrder: 0
       cellRect:
@@ -870,7 +910,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: addda2e014bfede4b98210de14214f18
-    - name: Pipina_particulas_Frame_20
+    - name: Frame_20
       frameIndex: 20
       additiveSortOrder: 0
       cellRect:
@@ -879,7 +919,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 96be41be4b0c401409be4765e8f38697
-    - name: Pipina_particulas_Frame_21
+    - name: Frame_21
       frameIndex: 21
       additiveSortOrder: 0
       cellRect:
@@ -888,7 +928,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: c013dcff8075a8b4e80bb677a2c471a6
-    - name: Pipina_particulas_Frame_22
+    - name: Frame_22
       frameIndex: 22
       additiveSortOrder: 0
       cellRect:
@@ -897,7 +937,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: eded1c92db2e87549b100fbb54dbb20c
-    - name: Pipina_particulas_Frame_23
+    - name: Frame_23
       frameIndex: 23
       additiveSortOrder: 0
       cellRect:
@@ -906,7 +946,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 5296474e48566f543ae5b42dc2a0ca95
-    - name: Pipina_particulas_Frame_24
+    - name: Frame_24
       frameIndex: 24
       additiveSortOrder: 0
       cellRect:
@@ -915,7 +955,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 09ebe1a53bc58f447b9354ba2c1f1588
-    - name: Pipina_particulas_Frame_25
+    - name: Frame_25
       frameIndex: 25
       additiveSortOrder: 0
       cellRect:
@@ -924,7 +964,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: 85f9da3fb530c20409d2b448f5f6fa3e
-    - name: Pipina_particulas_Frame_26
+    - name: Frame_26
       frameIndex: 26
       additiveSortOrder: 0
       cellRect:
@@ -933,7 +973,7 @@ ScriptedImporter:
         width: 13
         height: 15
       spriteId: cfce29d169f2b2f469d06b0e9e4f07dd
-    - name: Pipina_particulas_Frame_27
+    - name: Frame_27
       frameIndex: 27
       additiveSortOrder: 0
       cellRect:
@@ -943,9 +983,13 @@ ScriptedImporter:
         height: 15
       spriteId: 237f9e5df8155b8429adc456ba872d32
     linkedCells: []
+    tileCells: []
+    tileSetIndex: 0
     parentIndex: -1
+  tileSets: []
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 17, y: 16}
+  previousTextureSize: {x: 256, y: 128}

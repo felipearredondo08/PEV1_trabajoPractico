@@ -49,7 +49,7 @@ public class Enemy2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
     }
 
     private void Flip()
@@ -74,7 +74,7 @@ public class Enemy2 : MonoBehaviour
                 Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
                 if (playerRb != null)
                 {
-                    playerRb.velocity = new Vector2(playerRb.velocity.x, bounceForce);
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, bounceForce);
                 }
 
                 // Instanciar partículas de explosión

@@ -127,7 +127,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
     }
 
     private void Flip()

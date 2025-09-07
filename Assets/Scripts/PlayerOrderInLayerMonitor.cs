@@ -27,7 +27,7 @@ public class PlayerOrderInLayerMonitor : MonoBehaviour
             return;
 
         // Determinar la dirección del movimiento
-        float velocityX = rb2D.velocity.x;
+        float velocityX = rb2D.linearVelocity.x;
 
         if (velocityX > 0.1f) // Moviéndose a la derecha
         {

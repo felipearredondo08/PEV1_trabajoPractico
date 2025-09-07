@@ -108,7 +108,7 @@ public class Controller : MonoBehaviour
         anim.SetBool("isGrounded", isGrounded);
 
         // Detectar caída libre
-        if (rbody.velocity.y < 0 && !isGrounded) // Si la velocidad en Y es negativa y no está en el suelo
+        if (rbody.linearVelocity.y < 0 && !isGrounded) // Si la velocidad en Y es negativa y no está en el suelo
         {
             if (!isFalling)
             {
@@ -166,7 +166,7 @@ public class Controller : MonoBehaviour
                 }
             }
 
-            tramoAgarrado.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(movX * velBalanceo, 0);
+            tramoAgarrado.transform.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(movX * velBalanceo, 0);
         }
 
         if (puedeMoverse == false)
@@ -179,7 +179,7 @@ public class Controller : MonoBehaviour
     {
         agarrado = false;
         rbody.isKinematic = false;
-        rbody.velocity = new Vector2(0, 0);
+        rbody.linearVelocity = new Vector2(0, 0);
         transform.rotation = Quaternion.identity;
         spr.sprite = null; // Restablecer el sprite al soltarse
         anim.enabled = true; // Reactivar las animaciones normales
@@ -200,7 +200,7 @@ public class Controller : MonoBehaviour
         {
             agarrado = true;
             tramoAgarrado = other.transform;
-            other.GetComponent<Rigidbody2D>().AddForce(rbody.velocity * multiplicadorChoque, ForceMode2D.Impulse);
+            other.GetComponent<Rigidbody2D>().AddForce(rbody.linearVelocity * multiplicadorChoque, ForceMode2D.Impulse);
 
             // Suspender la gravedad
             rbody.isKinematic = true;
@@ -222,7 +222,7 @@ public class Controller : MonoBehaviour
         if (!puedeMoverse) return;
 
         float horizontalInput = Input.GetAxis("Horizontal");
-        rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
+        rbody.linearVelocity = new Vector2(horizontalInput * movementSpeed, rbody.linearVelocity.y);
         isMoving = horizontalInput != 0;
     }
 
@@ -232,7 +232,7 @@ public class Controller : MonoBehaviour
         if (coyoteTimeCounter <= 0) return;
 
         // Aplica la fuerza de salto
-        rbody.velocity = Vector2.up * jumpForce;
+        rbody.linearVelocity = Vector2.up * jumpForce;
 
         audioSource.Play();
 
@@ -345,7 +345,7 @@ public class Controller : MonoBehaviour
 
     public void AplicarGolpe()
     {
-        rbody.velocity = new Vector2(rbody.velocity.x, 0);
+        rbody.linearVelocity = new Vector2(rbody.linearVelocity.x, 0);
         Vector2 direccionGolpe;
 
         puedeMoverse = false;
@@ -358,7 +358,7 @@ public class Controller : MonoBehaviour
         //audioSource.PlayOneShot
 
         // Determinar dirección del golpe
-        if (rbody.velocity.x > 0)
+        if (rbody.linearVelocity.x > 0)
         {
             direccionGolpe = new Vector2(-1, 1);
         }
@@ -369,9 +369,9 @@ public class Controller : MonoBehaviour
 
         rbody.AddForce(direccionGolpe * fuezaGolpe);
 
-        if (rbody.velocity.y > maxVelYDespuesDelGolpe)
+        if (rbody.linearVelocity.y > maxVelYDespuesDelGolpe)
         {
-            rbody.velocity = new Vector2(rbody.velocity.x, maxVelYDespuesDelGolpe);
+            rbody.linearVelocity = new Vector2(rbody.linearVelocity.x, maxVelYDespuesDelGolpe);
         }
 
         // Solo una corrutina que controla todo el proceso

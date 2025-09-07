@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     // Cerrar el juego al presionar 'Escape'
     if (Input.GetKeyDown(KeyCode.Escape))
     {
-        Application.Quit(); // Cierra el juego (solo funciona en una build)
+        //Application.Quit(); // Cierra el juego (solo funciona en una build)
     }
 
     }
