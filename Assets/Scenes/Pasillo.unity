@@ -9327,7 +9327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1080908390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51169,8 +51169,12 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   multiplicadorChoque: 10
   velBalanceo: 0.67
+  fuezaGolpe: 0
   spriteBalanceoDerecha: {fileID: -872832554, guid: 4f833e3881659e34ebd7bea87b0edccb, type: 3}
   spriteBalanceoIzquierda: {fileID: -872832554, guid: 4f833e3881659e34ebd7bea87b0edccb, type: 3}
+  maxVelYDespuesDelGolpe: 5
+  spriteGolpeado: {fileID: 0}
+  duracionGolpe: 0.5
 --- !u!4 &1598638361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 516200434142726028, guid: bd35f3dc34b1386439bd7ffd820c0c04, type: 3}
