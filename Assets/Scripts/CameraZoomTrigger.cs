@@ -4,13 +4,13 @@ using Cinemachine;
 public class CameraZoomAndOffsetTrigger : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
-    public float zoomedOutSize ;
+    public float zoomedOutSize;
     public float transitionSpeed = 2f;
     public float offsetX = 0.0f;
     public float offsetY = 0.0f;
     public Camera parallaxCamera;
     public MonoBehaviour parallaxScript; // Referencia al script de parallax (MonoBehaviour para flexibilidad)
-
+    [SerializeField]
     private float initialZoomSize;
     private float initialScreenX;
     private float initialScreenY;
@@ -63,16 +63,17 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             targetSize = zoomedOutSize;
             targetScreenX = initialScreenX + offsetX; // Basado en el valor inicial
             targetScreenY = initialScreenY + offsetY;
-
-            // Desactivar el parallax
-            if (parallaxCamera != null)
-            {
-                parallaxCamera.enabled = false;
-            }
-            if (parallaxScript != null)
-            {
-                parallaxScript.enabled = false;
-            }
+            /*
+                        // Desactivar el parallax
+                        if (parallaxCamera != null)
+                        {
+                            parallaxCamera.enabled = false;
+                        }
+                        if (parallaxScript != null)
+                        {
+                            parallaxScript.enabled = false;
+                        }
+                    }*/
         }
     }
 
@@ -80,12 +81,13 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Saliendo camara");
             // Restablecer los valores al estado inicial
-            targetSize = initialZoomSize;
+            targetSize = 1;
             targetScreenX = initialScreenX;
             targetScreenY = initialScreenY;
 
-            // Activar el parallax
+           /* // Activar el parallax
             if (parallaxCamera != null)
             {
                 parallaxCamera.enabled = true;
@@ -93,7 +95,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
             if (parallaxScript != null)
             {
                 parallaxScript.enabled = true;
-            }
+            }*/
         }
     }
 }

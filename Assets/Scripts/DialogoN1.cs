@@ -54,10 +54,10 @@ public class DialogoN1 : MonoBehaviour
         yield return StartCoroutine(FadeOutTextAndBackground());
 
         // Destruir el objeto después de terminar el diálogo
-        if (areaDialogoInicialCamara != null)
+       /* if (areaDialogoInicialCamara != null)
         {
             Destroy(areaDialogoInicialCamara);
-        }
+        }*/
     }
 
     private IEnumerator TypeLine(string line)
