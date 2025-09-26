@@ -13,8 +13,8 @@ public class Pantallagameover : MonoBehaviour
 
     void Update()
     {
-        // Reinicia el nivel anterior al presionar Enter
-        if (Input.GetKeyDown(KeyCode.Return))
+        // Reinicia el nivel al presionar Enter o el botón de salto del joystick
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Jump"))
         {
             SceneManager.LoadScene(lastLevelIndex);
         }
