@@ -83,7 +83,7 @@ public class CameraZoomAndOffsetTrigger : MonoBehaviour
         {
             Debug.Log("Saliendo camara");
             // Restablecer los valores al estado inicial
-            targetSize = 1;
+            targetSize = 0.8f;
             targetScreenX = initialScreenX;
             targetScreenY = initialScreenY;
 

@@ -67,6 +67,10 @@ public class DoorInteraction : MonoBehaviour
         {
             StartCoroutine(FadeZoomAndLoadLevel());
         }
+        if (isPlayerInTrigger && Input.GetAxisRaw("VerticalJoy") > 0 && !isTransitioning)
+        {
+            StartCoroutine(FadeZoomAndLoadLevel());
+        }
     }
 
     private IEnumerator FadeZoomAndLoadLevel()

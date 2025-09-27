@@ -60,6 +60,37 @@ public class Controller : MonoBehaviour
     private bool estaGolpeado = false;
 
 
+    // Rope "coyote time" (ventana para agarrar cuerda)
+    [SerializeField] private float ropeCoyoteTime = 0.15f;
+    private float ropeCoyoteCounter = 0f;
+    private Collider2D ropeCandidate = null;
+
+    // Ajustes arriba en la clase (puedes dejar estos valores públicos)
+    [SerializeField] private float joyDeadzone = 0.12f;  // más chico para que el stick responda
+    [SerializeField] private float kbDeadzone = 0.01f;  // casi nulo, por si usás A/D o flechas
+    [SerializeField] private float ropeMaxSpeed = 4.5f;
+    [SerializeField] private float ropeAccel = 25f;
+    private float ropeVelTarget = 0f;
+    private Vector3 baseScale;
+    //Mecanica de balanceo
+    // Salto desde soga: intención pegajosa + impulso horizontal
+    [SerializeField] private float ropeIntentBufferTime = 0.25f; // ventana para recordar dirección
+    [SerializeField] private float ropeJumpHorizSpeed = 5.5f;   // impulso horizontal al saltar
+    private float lastRopeDir = 0f;          // -1 izquierda, +1 derecha
+    private float lastRopeDirTimer = 0f;     // cuenta regresiva del buffer
+    // Salto asistido desde soga
+    [Header("Asistencia al salto desde soga")]
+    [SerializeField] private float ropeJumpUpSpeed = 7.0f;   // impulso vertical base
+    [SerializeField] private float ropeAssistSearchRadius = 12f; // radio para buscar próxima soga
+    [SerializeField] private float ropeAssistDYThreshold = 0.5f; // cuánto arriba debe estar para asistir
+    [SerializeField] private float ropeAssistPerMeter = 1.5f; // +VY por metro de diferencia
+    [SerializeField] private float ropeAssistVYMax = 3.5f; // tope del extra vertical
+
+    // Amortiguación breve de la soga al agarrar
+    [SerializeField] private float ropeGrabDampenTime = 0.15f;
+    [SerializeField] private float ropeGrabExtraDrag = 4f;
+    [SerializeField] private float ropeGrabExtraAngularDrag = 1.5f;
+
 
     void Start()
     {
@@ -67,6 +98,7 @@ public class Controller : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>(); // Inicializar el SpriteRenderer
+        baseScale = transform.localScale; // <— importante para que no “se encoja”
     }
 
     void Awake()
@@ -78,37 +110,49 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        float movY = Input.GetAxisRaw("Vertical");
-        float movX = Input.GetAxisRaw("Horizontal");
-        flip();
-        Walk();
+        // Combina teclado (Horizontal/Vertical) + joystick (HorizontalJoy/VerticalJoy)
+        float movX = GetAxisCombined("Horizontal", "HorizontalJoy", true);
+        float movY = GetAxisCombined("Vertical", "VerticalJoy", true);
 
-        // Detectar si está en el suelo
+        // --- Estado agarrado: manejar y salir del frame ---
+        if (agarrado)
+        {
+            HandleWhileGrabbed(movX, movY);
+            return; // no mezclar con movimiento normal ni flip
+        }
+
+        // --- Movimiento normal / flip (solo si NO está agarrado) ---
+        flip(movX);
+        Walk(movX); // internamente respeta puedeMoverse
+
+        // --- Suelo & Coyote Time ---
         bool wasGrounded = isGrounded;
         isGrounded = Physics2D.CircleCast(transform.position, radius, Vector3.down, groundRayDist, groundLayer);
 
-        // Si está en el suelo, reiniciamos el coyote time
-        if (isGrounded)
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            // Si no está en el suelo, reducimos el tiempo restante de coyote time
-            coyoteTimeCounter -= Time.deltaTime;
-        }
+        if (isGrounded) coyoteTimeCounter = coyoteTime;
+        else coyoteTimeCounter -= Time.deltaTime;
 
+        // --- Saltar ---
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
         {
             Jump();
         }
 
-        // Lógica de animaciones
+        // --- Ventana para agarrar cuerda (rope coyote) ---
+        if (ropeCoyoteCounter > 0f) ropeCoyoteCounter -= Time.deltaTime;
+
+        bool grabPressed = Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire3");
+        if (!agarrado && ropeCoyoteCounter > 0f && ropeCandidate != null && grabPressed)
+        {
+            TryGrabRope(ropeCandidate);
+        }
+
+        // --- Animator flags base ---
         anim.SetBool("isMoving", isMoving);
         anim.SetBool("isGrounded", isGrounded);
 
-        // Detectar caída libre
-        if (rbody.velocity.y < 0 && !isGrounded) // Si la velocidad en Y es negativa y no está en el suelo
+        // --- Caída libre (sprite de caída y pausa de anim mientras cae) ---
+        if (rbody.velocity.y < 0 && !isGrounded)
         {
             if (!isFalling)
             {
@@ -120,60 +164,151 @@ public class Controller : MonoBehaviour
                 fallTimer += Time.deltaTime;
                 if (fallTimer >= fallDelay)
                 {
-                    // Cambiar al sprite de caída libre
                     spr.sprite = fallSprite;
-                    anim.enabled = false; // Desactivar las animaciones normales
+                    anim.enabled = false;
                 }
             }
         }
-        else if (isFalling) // Si estaba cayendo pero ya no
+        else if (isFalling)
         {
-            // Reanudar las animaciones normales
             isFalling = false;
-            anim.enabled = true; // Reanudar las animaciones normales
-            spr.sprite = null; // Volver al sprite normal (o dejar que el Animator lo maneje)
+            anim.enabled = true;
+            spr.sprite = null;
         }
 
-        if (agarrado)
+        if (!puedeMoverse) return;
+    }
+
+
+    void FixedUpdate()
+    {
+        if (agarrado && tramoAgarrado != null)
         {
-            // Desactivar las animaciones normales
-            anim.enabled = false;
-
-            // Posicionar y rotar igual al tramo
-            transform.position = tramoAgarrado.transform.position + offset;
-            transform.rotation = tramoAgarrado.transform.rotation;
-
-            // Cambiar el sprite según la dirección del balanceo
-            if (movX > 0)
+            var ropeRb = tramoAgarrado.GetComponent<Rigidbody2D>();
+            if (ropeRb != null)
             {
-                spr.sprite = spriteBalanceoDerecha; // Sprite para balanceo a la derecha
+                float newVX = Mathf.MoveTowards(ropeRb.velocity.x, ropeVelTarget, ropeAccel * Time.fixedDeltaTime);
+                ropeRb.velocity = new Vector2(newVX, ropeRb.velocity.y);
             }
-            else if (movX < 0)
-            {
-                spr.sprite = spriteBalanceoIzquierda; // Sprite para balanceo a la izquierda
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (movY < 0)
-                {
-                    seSuelta(); // Solo se suelta sin saltar si el jugador presiona hacia abajo
-                }
-                else
-                {
-                    seSueltaYSalta();
-                    Jump(); // Salta si no está presionando hacia abajo
-                }
-            }
-
-            tramoAgarrado.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(movX * velBalanceo, 0);
-        }
-
-        if (puedeMoverse == false)
-        {
-            return;
         }
     }
+    private float GetAxisCombined(string axisKb, string axisJoy, bool raw = true)
+    {
+        float a = raw ? Input.GetAxisRaw(axisKb) : Input.GetAxis(axisKb);
+        float b = raw ? Input.GetAxisRaw(axisJoy) : Input.GetAxis(axisJoy);
+        return Mathf.Abs(b) > Mathf.Abs(a) ? b : a; // el de mayor magnitud manda
+    }
+    private void HandleWhileGrabbed(float movX, float movY)
+    {
+        // Mantener escala base (evita encogerse por flips previos)
+        float signX = Mathf.Sign(Mathf.Abs(transform.localScale.x) < 0.0001f ? 1f : transform.localScale.x);
+        transform.localScale = new Vector3(signX * Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
+
+        // Seguir tramo (posición + rotación)
+        if (tramoAgarrado != null)
+            transform.SetPositionAndRotation(tramoAgarrado.position + offset, tramoAgarrado.rotation);
+
+        // --- Lectura de intención lateral: priorizar joystick, luego teclado ---
+        float joy = Input.GetAxisRaw("HorizontalJoy"); // joystick
+        float kb = Input.GetAxisRaw("Horizontal");    // teclado
+        float raw;
+        bool usingJoy = Mathf.Abs(joy) > joyDeadzone;
+
+        if (usingJoy)
+        {
+            float s = Mathf.Sign(joy);
+            float t = Mathf.InverseLerp(joyDeadzone, 1f, Mathf.Abs(joy)); // 0..1
+            raw = s * (t * t); // curva suave
+        }
+        else
+        {
+            raw = Mathf.Abs(kb) > kbDeadzone ? Mathf.Sign(kb) : 0f; // teclado digital
+        }
+
+        // Sprite de balanceo (intención visual)
+        if (movX > 0.01f) spr.sprite = spriteBalanceoDerecha;
+        else if (movX < -0.01f) spr.sprite = spriteBalanceoIzquierda;
+        else if (Mathf.Abs(raw) > 0) spr.sprite = raw > 0 ? spriteBalanceoDerecha : spriteBalanceoIzquierda;
+
+        // --- Sticky intent: recordar última dirección válida un rato ---
+        if (Mathf.Abs(raw) > 0.01f)
+        {
+            lastRopeDir = Mathf.Sign(raw);
+            lastRopeDirTimer = ropeIntentBufferTime;
+        }
+        else if (lastRopeDirTimer > 0f)
+        {
+            lastRopeDirTimer -= Time.deltaTime;
+        }
+
+        // --- Soltar / saltar desde soga ---
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (movY < 0) // caída deliberada
+            {
+                seSuelta();
+                return;
+            }
+
+            // 1) dirección preferida para el salto
+            float dir = 0f;
+            if (Mathf.Abs(raw) > 0.01f) dir = Mathf.Sign(raw);
+            else if (lastRopeDirTimer > 0f) dir = lastRopeDir;
+            else
+            {
+                var ropeRb = tramoAgarrado ? tramoAgarrado.GetComponent<Rigidbody2D>() : null;
+                if (ropeRb && Mathf.Abs(ropeRb.velocity.x) > 0.05f) dir = Mathf.Sign(ropeRb.velocity.x);
+            }
+            if (Mathf.Abs(dir) < 0.01f) dir = 1f; // fallback a la derecha
+
+            // Asegurar que Jump() se ejecute: renovar coyote antes de soltar
+            coyoteTimeCounter = coyoteTime;
+
+            // Soltar (pasa a dinámico) + salto estándar (audio/anim/vertical base)
+            seSueltaYSalta();
+            Jump();
+
+            // Base: impulso horizontal y conservar Y de Jump()
+            float targetVX = ropeJumpHorizSpeed * dir;
+            float targetVY = rbody.velocity.y;
+
+            // Assist vertical si la próxima cuerda está más alta
+            Transform nextRope = FindNextRopeAhead(dir, ropeAssistSearchRadius);
+            if (nextRope != null)
+            {
+                float dy = nextRope.position.y - transform.position.y;
+                if (dy > ropeAssistDYThreshold)
+                {
+                    float extra = Mathf.Min(dy * ropeAssistPerMeter, ropeAssistVYMax);
+                    targetVY += extra;
+                }
+            }
+
+            // Aplicar velocidad final
+            rbody.velocity = new Vector2(targetVX, targetVY);
+            return; // terminar este frame aquí
+        }
+
+        // --- Objetivo de velocidad lateral de la cuerda (aplicado en FixedUpdate) ---
+        ropeVelTarget = raw * ropeMaxSpeed;
+    }
+    private Transform FindNextRopeAhead(float dir, float radius)
+    {
+        var cols = Physics2D.OverlapCircleAll(transform.position, radius);
+        Transform best = null;
+        float bestDist = float.MaxValue;
+
+        foreach (var c in cols)
+        {
+            if (!c || !c.CompareTag("Cuerda")) continue;
+            Vector2 to = c.transform.position - transform.position;
+            if (Mathf.Sign(to.x) != Mathf.Sign(dir)) continue; // solo las de adelante
+            float d = to.sqrMagnitude;
+            if (d < bestDist) { bestDist = d; best = c.transform; }
+        }
+        return best;
+    }
+
 
     void seSuelta()
     {
@@ -194,38 +329,168 @@ public class Controller : MonoBehaviour
         anim.enabled = true; // Reactivar las animaciones normales
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Cuerda") && Input.GetButtonDown("Fire1"))
+        if (other.CompareTag("Cuerda"))
         {
-            agarrado = true;
-            tramoAgarrado = other.transform;
-            other.GetComponent<Rigidbody2D>().AddForce(rbody.velocity * multiplicadorChoque, ForceMode2D.Impulse);
-
-            // Suspender la gravedad
-            rbody.isKinematic = true;
-
-            // Desactivar las animaciones normales
-            anim.enabled = false;
+            ropeCandidate = other;
+            ropeCoyoteCounter = ropeCoyoteTime; // abre la ventana para agarrar
         }
     }
 
-    /*public void Walk()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
-        isMoving = horizontalInput != 0;
-    }*/
-
-    public void Walk()
+        if (other == ropeCandidate && !agarrado)
+        {
+            ropeCandidate = null;
+            ropeCoyoteCounter = 0f;
+        }
+    }
+    private void TryGrabRope(Collider2D ropeCol)
     {
-        if (!puedeMoverse) return;
-
-        float horizontalInput = Input.GetAxis("Horizontal");
-        rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
-        isMoving = horizontalInput != 0;
+        if (ropeCol == null) return;
+        Grab(ropeCol);
+        // Al agarrar, ya no necesitamos la ventana
+        ropeCoyoteCounter = 0f;
     }
 
+    private void Grab(Collider2D ropeCol)
+    {
+        agarrado = true;
+
+        // Elegir un tramo estable (evita el último eslabón/leaf)
+        Transform stable = ChooseStableSegment(ropeCol.transform);
+        tramoAgarrado = stable != null ? stable : ropeCol.transform;
+
+        // Resetear toda la cadena (sin heredar inercia)
+        ResetRopeChain(tramoAgarrado.GetComponent<Collider2D>() ?? ropeCol);
+
+        // Amortiguar la cadena un instante (drag alto temporal)
+        StartCoroutine(DampenRopeOnGrab(tramoAgarrado, ropeGrabDampenTime));
+
+        // Resetear intención/objetivo de balanceo
+        ropeVelTarget = 0f;
+        lastRopeDir = 0f;
+        lastRopeDirTimer = 0f;
+
+        // Congelar al player y limpiar su velocidad
+        rbody.isKinematic = true;
+        rbody.velocity = Vector2.zero;
+
+        // Desactivar animaciones normales
+        anim.enabled = false;
+    }
+    // Si el segmento tocado es "leaf" (nadie lo tiene como connectedBody),
+    // usamos su eslabón superior (el connectedBody del propio Hinge).
+    private Transform ChooseStableSegment(Transform hit)
+    {
+        if (hit == null) return null;
+
+        var rb = hit.GetComponent<Rigidbody2D>();
+        if (rb == null) return hit;
+
+        // ¿Algún joint en el grupo cuelga de este rb? (si sí, NO es leaf)
+        Transform group = hit.parent != null ? hit.parent : hit;
+        var jointsInGroup = group.GetComponentsInChildren<HingeJoint2D>(true);
+
+        bool hasChildAttached = false;
+        foreach (var hj in jointsInGroup)
+        {
+            if (hj != null && hj.connectedBody == rb) { hasChildAttached = true; break; }
+        }
+
+        if (!hasChildAttached)
+        {
+            // Es leaf: buscamos su eslabón superior
+            var myHinge = hit.GetComponent<HingeJoint2D>();
+            if (myHinge != null && myHinge.connectedBody != null)
+                return myHinge.connectedBody.transform;
+        }
+        return hit;
+    }
+
+    // Subir drag/angDrag un ratito para apagar latigazos iniciales
+    private IEnumerator DampenRopeOnGrab(Transform anySegment, float time)
+    {
+        if (anySegment == null) yield break;
+
+        Transform group = anySegment.parent != null ? anySegment.parent : anySegment;
+        var rbs = group.GetComponentsInChildren<Rigidbody2D>(true);
+
+        // Guardar y aplicar
+        var originals = new List<(Rigidbody2D rb, float drag, float ang)>(rbs.Length);
+        foreach (var rb in rbs)
+        {
+            if (rb == null) continue;
+            originals.Add((rb, rb.drag, rb.angularDrag));
+
+            // Reiniciar velocidades por si algo quedó oscilando
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            rb.drag = rb.drag + ropeGrabExtraDrag;
+            rb.angularDrag = rb.angularDrag + ropeGrabExtraAngularDrag;
+        }
+
+        yield return new WaitForSeconds(time);
+
+        // Restaurar valores originales
+        foreach (var o in originals)
+        {
+            if (o.rb == null) continue;
+            o.rb.drag = o.drag;
+            o.rb.angularDrag = o.ang;
+        }
+    }
+
+    private void ResetRopeChain(Collider2D ropeCol)
+    {
+        var startRB = ropeCol.attachedRigidbody ?? ropeCol.GetComponentInParent<Rigidbody2D>();
+        if (startRB == null) return;
+
+        // Buscamos todos los RB conectados por HingeJoint2D (en ambos sentidos)
+        var visited = new HashSet<Rigidbody2D>();
+        var stack = new Stack<Rigidbody2D>();
+        stack.Push(startRB);
+
+        // Para no escanear toda la escena, limitamos joints al mismo "grupo" (padre)
+        Transform group = startRB.transform.parent != null ? startRB.transform.parent : startRB.transform;
+        var jointsInGroup = group.GetComponentsInChildren<HingeJoint2D>(true);
+
+        while (stack.Count > 0)
+        {
+            var rb = stack.Pop();
+            if (rb == null || !visited.Add(rb)) continue;
+
+            // Apagamos su movimiento
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            // rb.Sleep(); // opcional: dormir el RB para que quede planchado
+
+            // 1) Joints pegados a este RB
+            foreach (var hj in rb.GetComponents<HingeJoint2D>())
+            {
+                if (hj.connectedBody != null && !visited.Contains(hj.connectedBody))
+                    stack.Push(hj.connectedBody);
+            }
+            // 2) Joints de otros que lo tienen como connectedBody
+            foreach (var hj in jointsInGroup)
+            {
+                if (hj != null && hj.connectedBody == rb && hj.attachedRigidbody != null && !visited.Contains(hj.attachedRigidbody))
+                    stack.Push(hj.attachedRigidbody);
+            }
+        }
+    }
+
+    /*  public void Walk()
+      {
+          if (!puedeMoverse) return;
+
+          float horizontalInput = Input.GetAxis("Horizontal");
+          rbody.velocity = new Vector2(horizontalInput * movementSpeed, rbody.velocity.y);
+          isMoving = horizontalInput != 0;
+      }
+    */
     public void Jump()
     {
         // Permitir el salto si está en el suelo o si aún queda tiempo de Coyote Time
@@ -250,19 +515,21 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public void flip()
+    public void Walk(float movX)
     {
-        float movHor = Input.GetAxis("Horizontal");
-
-        if (movHor > 0)
-        {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else if (movHor < 0)
-        {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
+        if (!puedeMoverse) return;
+        rbody.velocity = new Vector2(movX * movementSpeed, rbody.velocity.y);
+        isMoving = Mathf.Abs(movX) > 0.01f;
     }
+
+    public void flip(float movHor)
+    {
+        if (movHor > 0.01f)
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        else if (movHor < -0.01f)
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+    }
+
 
     public bool EstaEnSuelo()
     {
@@ -394,35 +661,46 @@ public class Controller : MonoBehaviour
         // Restaurar control y animaciones
         puedeMoverse = true;
         spr.sprite = null;
-     
+
         anim.enabled = true;
     }
 
-public IEnumerator CambiarSpritePorGolpe()
-{
-    anim.enabled = false; // Desactiva el animator para mostrar solo el sprite golpeado
-    spr.sprite = spriteGolpeado;
+    public IEnumerator CambiarSpritePorGolpe()
+    {
+        anim.enabled = false; // Desactiva el animator para mostrar solo el sprite golpeado
+        spr.sprite = spriteGolpeado;
 
-    yield return new WaitForSeconds(duracionGolpe);
+        yield return new WaitForSeconds(duracionGolpe);
 
-    anim.enabled = true; // Reactiva animaciones normales
-    spr.sprite = null;   // Deja que el animator recupere el sprite según el estado
-}
-IEnumerator EsperarYActivarMovimiento()
-  {
-      yield return new WaitForSeconds(0.1f);
-      while (!EstaEnSuelo())
-      {
-          yield return null;
-      }
+        anim.enabled = true; // Reactiva animaciones normales
+        spr.sprite = null;   // Deja que el animator recupere el sprite según el estado
+    }
+    IEnumerator EsperarYActivarMovimiento()
+    {
+        yield return new WaitForSeconds(0.1f);
+        while (!EstaEnSuelo())
+        {
+            yield return null;
+        }
 
-      puedeMoverse = true;
+        puedeMoverse = true;
 
-      // Restaurar animaciones normales
-      spr.sprite = null; // Deja que el Animator controle el sprite
-      anim.enabled = true;
-  }
+        // Restaurar animaciones normales
+        spr.sprite = null; // Deja que el Animator controle el sprite
+        anim.enabled = true;
+    }
+    void OnDrawGizmosSelected()
+    {
+        // color verde si detecta suelo, rojo si no
+        Gizmos.color = Color.red;
+#if UNITY_EDITOR
+        if (Application.isPlaying && isGrounded)
+            Gizmos.color = Color.green;
+#endif
 
+        // Dibuja el círculo del check
+        Gizmos.DrawWireSphere(transform.position + Vector3.down * groundRayDist, radius);
+    }
 
 
 }
